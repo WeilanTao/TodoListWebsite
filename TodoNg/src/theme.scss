@@ -1,0 +1,8 @@
+
+@use "~@angular/material/theming" as mat;
+
+
+@include mat-core();
+
+$app-primary: mat.define-palette(mat.$indigo-palette, 500);
+$app-accent: mat.define-palette(mat.$orange-platte, 600);
