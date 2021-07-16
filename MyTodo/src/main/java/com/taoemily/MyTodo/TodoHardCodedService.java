@@ -34,10 +34,11 @@ public class TodoHardCodedService {
     }
 
     public Todo save(Todo todo){
-        System.out.println("hihihi"+todo.getId());
         Long id = todo.getId();
-//
-
+        if(id!=null )
+            deleteById(id);
+        else
+            todo.setId(++idCounter);
 
         todos.add(todo);
         return todo;
