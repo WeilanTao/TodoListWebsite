@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserTodoComponent } from './user-todo/user-todo.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { TodolistComponent } from './todolist/todolist.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ErrorpageComponent } from './errorpage/errorpage.component';
     LoginComponent,
     HomeComponent,
     UserTodoComponent,
-    ErrorpageComponent
+    ErrorpageComponent,
+    TodolistComponent
   ],
   imports: [
     BrowserModule,

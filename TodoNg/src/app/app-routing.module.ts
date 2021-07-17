@@ -8,8 +8,9 @@ import { UserTodoComponent } from './user-todo/user-todo.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'todo/:name', component: UserTodoComponent },
-  { path: '**', component: ErrorpageComponent }
+  { path: 'MyTodo/:name', component: UserTodoComponent },
+  
+  { path: '**', component: ErrorpageComponent }//this has to be the last one in the list; otherwise it will filter out anything below it
 ];
 
 @NgModule({

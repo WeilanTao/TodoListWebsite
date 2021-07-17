@@ -9,8 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  // email:string="";
-  // password:string="";
   invalidLogin: boolean = false;
   isShow: boolean = false;
   isSubmitted = false;
@@ -68,14 +66,10 @@ export class LoginComponent implements OnInit {
     let emailaddress = this.loginform.get('account.email')?.value as string;
     let passWord = this.loginform.get('account.password')?.value as string;
     if (emailaddress === "w4tao@uwaterloo.ca" && passWord === "123123") {
-      this.router.navigate(['todo', emailaddress]);
+      this.router.navigate(['MyTodo', emailaddress]);
       this.invalidLogin = false;
     } else {
-      console.log(111111);
-
       this.invalidLogin = true;
-      // this.loginform.get('account.email')?.setValue('');
-      // this.loginform.get('account.password')?.setValue('');
       this.loginform.reset();
       console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
     }

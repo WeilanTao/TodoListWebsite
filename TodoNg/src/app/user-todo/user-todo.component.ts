@@ -8,6 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserTodoComponent implements OnInit {
 
+  todo={
+    id:1,
+    description:'learn to Dance'
+  }
+
   name:string="";
   constructor(
     private route:Router,
