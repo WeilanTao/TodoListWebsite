@@ -3,7 +3,8 @@
 
     <div formGroupName="account">
         <div class="email">
-            <label for="account" >Email address</label> <!--sr-only improve accessbility by reading the content for disabilities by screen reader-->
+            <label for="account">Email address</label>
+            <!--sr-only improve accessbility by reading the content for disabilities by screen reader-->
             <input type="email" id="email" name="email" class="form-control" placeholder="Email address"
                 formControlName="email" #userEmail (input)="inputEmail(userEmail)">
             <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
@@ -15,7 +16,7 @@
 
         <div class="password ">
 
-            <label for="password" >Password</label>
+            <label for="password">Password</label>
 
             <div class="input-group">
                 <input [type]="isShow? 'text':'password'" id="password" name="password" class="form-control"
@@ -37,13 +38,10 @@
         <p>FromGroupValues: {{ loginform.value | json }}</p>
     </div>
 
-    <div
-        *ngIf="invalidLogin && !password?.touched && !email?.touched" 
-        class="alert alert-danger">
+    <div *ngIf="invalidLogin && !password?.touched && !email?.touched" class="alert alert-danger">
         Invalid username and/or password.
     </div>
 
     <button [disabled]="!loginform.valid" class="btn btn-lg btn-primary btn-block" type="submit">Yep!</button>
 
 </form>
-
