@@ -8,13 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserTodoComponent implements OnInit {
 
+  name:string="";
   constructor(
     private route:Router,
     private activatedRoute:ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.snapshot.params['name'];
+    this.name=this.activatedRoute.snapshot.params['name'];
   }
 
 }

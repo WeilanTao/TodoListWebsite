@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserTodoComponent } from './user-todo/user-todo.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 
@@ -25,7 +25,8 @@ import { ErrorpageComponent } from './errorpage/errorpage.component';
     FormsModule,
     // HttpModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
