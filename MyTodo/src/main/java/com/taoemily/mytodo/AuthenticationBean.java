@@ -1,4 +1,4 @@
-package com.taoemily.MyTodo;
+package com.taoemily.mytodo;
 
 public class AuthenticationBean {
     String message;

@@ -1,4 +1,4 @@
-package com.taoemily.MyTodo;
+package com.taoemily.mytodo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

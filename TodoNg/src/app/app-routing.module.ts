@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'MyTodo/:name', component: UserTodoComponent },
-  
+  { path: 'MyTodo/:name/:projectname', component: UserTodoComponent },
   { path: '**', component: ErrorpageComponent }//this has to be the last one in the list; otherwise it will filter out anything below it
 ];
 

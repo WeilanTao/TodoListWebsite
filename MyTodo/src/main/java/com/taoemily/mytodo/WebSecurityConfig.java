@@ -1,4 +1,4 @@
-package com.taoemily.MyTodo;
+package com.taoemily.mytodo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,7 @@
-package com.taoemily.MyTodo;
+package com.taoemily.mytodo;
 
+import com.taoemily.mytodo.entity.Todo;
+import com.taoemily.mytodo.dao.TodoHardCodedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +46,7 @@ public class TodoResource {
 
         //append the url {id}
         URI uri= ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(todoCreated.getId())
+                .path("/{id}").buildAndExpand(todoCreated.getTodo_id())
                 .toUri();
 
         return ResponseEntity.created(uri).build();
