@@ -1,4 +1,4 @@
-package com.taoemily.mytodo.dao;
+package com.taoemily.mytodo.repository;
 
 import com.taoemily.mytodo.entity.User;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,8 @@
-package com.taoemily.mytodo;
+package com.taoemily.mytodo.controller;
 
+import com.taoemily.mytodo.repository.TodoRepository;
 import com.taoemily.mytodo.entity.Todo;
-import com.taoemily.mytodo.dao.TodoHardCodedService;
+import com.taoemily.mytodo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,41 +13,41 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-public class TodoResource {
+public class TodoController {
 
-    @Autowired
-    private TodoHardCodedService todoHardCodedService;
+   @Autowired
+    TodoService todoService;
 
-    @GetMapping("/users/{username}/todos")
-    public List<Todo> getAllTodo(@PathVariable  String username){
-        return todoHardCodedService.findAll();
+    @GetMapping("/users/{userId}/todos")
+    public List<Todo> getAllTodo(@PathVariable  Long userId){
+        return todoService.getAllTodos(userId);
     }
 
     @DeleteMapping("/users/{username}/todos/{id}")
-    public ResponseEntity<Void> deteleTode(@PathVariable String username, @PathVariable Long id){
-        Todo todo=todoHardCodedService.deleteById(id);
+    public void deteleTode(@PathVariable Todo deleteTodo, @PathVariable Long id){
+         todoService.deleteTodo(id);
 
-        if(todo!=null)
-            return ResponseEntity.noContent().build();
-
-        return ResponseEntity.notFound().build();
+//        if(deletedTodo!=null)
+//            return ResponseEntity.noContent().build();
+//
+//        return ResponseEntity.notFound().build();
     }
 
     @PutMapping(path="/users/{username}/todos/{id}", consumes = {"application/json"})
     public ResponseEntity<Todo> updateTodo(
             @PathVariable String username, @PathVariable Long id, @RequestBody Todo todo){
-        Todo todoUpdated= todoHardCodedService.save(todo);
+        Todo todoUpdated= todoService.updateTodo(todo, id);
         return new ResponseEntity<Todo>(todo, HttpStatus.OK);
     }
 
     @PostMapping(path="/users/{username}/todos", consumes = {"application/json"})
-    public ResponseEntity<Void> updateTodo(
+    public ResponseEntity<Void> createTodo(
             @PathVariable String username, @RequestBody Todo todo){
-        Todo todoCreated= todoHardCodedService.save(todo);
+        Long id= todoService.saveTodo(todo);
 
         //append the url {id}
         URI uri= ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(todoCreated.getTodo_id())
+                .path("/{id}").buildAndExpand(id)
                 .toUri();
 
         return ResponseEntity.created(uri).build();

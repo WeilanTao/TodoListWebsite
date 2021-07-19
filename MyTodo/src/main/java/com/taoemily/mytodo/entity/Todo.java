@@ -8,7 +8,7 @@ import java.util.Date;
 @Table(name = "todos")
 public class Todo {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     private Long todo_id;
 
     @Column(name = "todo_name", nullable = false)
@@ -17,21 +17,26 @@ public class Todo {
     @Column(name="description")
     private String description;
 
-    @Column(name="date", nullable = false)
+    @Column(name="target_date", nullable = false)
     private Date date;
 
     @Column(name="is_done", nullable = false)
     private Boolean isDone;
 
+
+    @Column(name="user_id", nullable = false)
+    private Long userId;
+
 //    @ManyToMany(mappedBy = "users")
 //    private List<User> users;
 
 
-    public Todo( String name, Date date, boolean isDone) {
+    public Todo( String name, Date date, boolean isDone, Long userId) {
 
         this.date = date;
         this.name = name;
         this.isDone = isDone;
+        this.userId=userId;
 
     }
 
@@ -94,6 +99,15 @@ public class Todo {
     public void setDone(Boolean done) {
         isDone = done;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
 
 //    public void setUsers(List<User> users) {
 //        this.users = users;
