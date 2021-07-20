@@ -17,16 +17,16 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class HibernateConfig {
 
-    @Value("${db.driver}")
+    @Value("${hibernate.connection.driver_class}")
     private String DRIVER;
 
-    @Value("${db.password}")
+    @Value("${hibernate.connection.password}")
     private String PASSWORD;
 
-    @Value("${db.url}")
+    @Value("${hibernate.connection.url}")
     private String URL;
 
-    @Value("${db.username}")
+    @Value("${hibernate.connection.username}")
     private String USERNAME;
 
     @Value("${hibernate.dialect}")

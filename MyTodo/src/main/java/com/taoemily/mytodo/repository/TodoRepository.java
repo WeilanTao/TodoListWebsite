@@ -25,12 +25,10 @@ public class TodoRepository {
     public List<Todo> getAllTodo(Long userId) {
 //        System.out.println(userId+"hihihi");
         Session session = this.sessionFactory.getCurrentSession();
-//        Criteria criteria = session.createCriteria(Todo.class);
-//        criteria.add(Restrictions.eq("userId",1l));
-        List<Todo> todoList = session.createQuery("from Todo", Todo.class).list();
-//        session.close();
-        System.out.println("hihihi");
-
+        Criteria criteria = session.createCriteria(Todo.class);
+        criteria.add(Restrictions.eq("userId",1l));
+//        List<Todo> todoList = session.createQuery("from Todo", Todo.class).list();
+        List<Todo> todoList = criteria.list();
         return todoList;
     }
 
