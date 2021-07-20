@@ -18,6 +18,9 @@ public class TodoController {
    @Autowired
     TodoService todoService;
 
+   public void setTodoService(TodoService todoService){
+       this.todoService=todoService;
+   }
     @GetMapping("/users/{userId}/todos")
     public List<Todo> getAllTodo(@PathVariable  Long userId){
         return todoService.getAllTodos(userId);

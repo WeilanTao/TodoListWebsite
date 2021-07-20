@@ -1,14 +1,19 @@
 package com.taoemily.mytodo.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 
 @Entity
 @Table(name = "todos")
-public class Todo {
+public class Todo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @Column(name="todo_id", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long todo_id;
 
     @Column(name = "todo_name", nullable = false)
@@ -30,9 +35,11 @@ public class Todo {
 //    @ManyToMany(mappedBy = "users")
 //    private List<User> users;
 
-
+    public Todo(){
+        super();
+    }
     public Todo( String name, Date date, boolean isDone, Long userId) {
-
+        super();
         this.date = date;
         this.name = name;
         this.isDone = isDone;

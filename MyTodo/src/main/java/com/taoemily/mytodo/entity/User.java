@@ -8,18 +8,19 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
+    @Column(name = "uesr_id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "uesr_name")
+    @Column(name = "uesr_name", nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "is_admin")
+    @Column(name = "is_admin", nullable = false)
     private Boolean isAdmin;
 
 //    @ManyToMany
