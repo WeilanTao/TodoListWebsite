@@ -24,7 +24,7 @@ public class TodoService {
         return todoRepository.getAllTodo(userId);
     }
 
-    public Todo getUserById(Long todoId){
+    public Todo getTodoById(Long todoId){
         return todoRepository.getTodoById(todoId);
     }
 

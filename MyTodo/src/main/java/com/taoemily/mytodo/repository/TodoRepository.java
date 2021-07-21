@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +27,7 @@ public class TodoRepository {
 //        System.out.println(userId+"hihihi");
         Session session = this.sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Todo.class);
-        criteria.add(Restrictions.eq("userId",1l));
+        criteria.add(Restrictions.eq("userId",userId));
 //        List<Todo> todoList = session.createQuery("from Todo", Todo.class).list();
         List<Todo> todoList = criteria.list();
         return todoList;
@@ -38,9 +39,13 @@ public class TodoRepository {
         return todo.getTodo_id();
     }
 
-    public Todo getTodoById(Long id) {
+    public Todo getTodoById(Long todoId) {
         Session session = this.sessionFactory.getCurrentSession();
-        Todo todo = (Todo) session.get(Todo.class, id);
+        Query query= session.createQuery("from Todo where todo_id=:todoId");
+        query.setLong("todoId", todoId);
+        System.out.println(todoId+"hihihihihi");
+        Todo todo=(Todo) query.uniqueResult();
+//        Todo todo = (Todo) session.get(Todo.class, todoId);
         return todo;
     }
 

@@ -21,9 +21,17 @@ public class TodoController {
    public void setTodoService(TodoService todoService){
        this.todoService=todoService;
    }
-    @GetMapping("/users/{userId}/todos")
+    @RequestMapping(method = RequestMethod.GET, path = "/users/{userId}/todos")
     public List<Todo> getAllTodo(@PathVariable  Long userId){
         return todoService.getAllTodos(userId);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path="/users/{userid}/todosById", produces = "application/json")
+    public Todo getTodoByTodoId(
+            @PathVariable(value="userid") Long userid, @RequestParam(required = true) Long todoid){ //Here @RequestParam is receiving query parameters! not Json!!!
+        System.out.println("HELLO HELLO HELLO HELLO "+ todoid);
+        Todo getTodo= todoService.getTodoById(todoid);
+        return getTodo;
     }
 
     @DeleteMapping("/users/{username}/todos/{id}")
@@ -43,9 +51,10 @@ public class TodoController {
         return new ResponseEntity<Todo>(todo, HttpStatus.OK);
     }
 
-    @PostMapping(path="/users/{username}/todos", consumes = {"application/json"})
+    @PostMapping(path="/users/{userid}/todos", consumes = {"application/json"})
     public ResponseEntity<Void> createTodo(
-            @PathVariable String username, @RequestBody Todo todo){
+            @PathVariable long userid, @RequestBody Todo todo){
+       //Here in the Json Todo object, the property todo_id  can be omitted; since the Todo entity generates the id automatically!!!
         Long id= todoService.saveTodo(todo);
 
         //append the url {id}
@@ -55,5 +64,6 @@ public class TodoController {
 
         return ResponseEntity.created(uri).build();
     }
+
 
 }
