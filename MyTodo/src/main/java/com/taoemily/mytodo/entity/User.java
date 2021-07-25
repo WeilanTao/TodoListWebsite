@@ -1,17 +1,27 @@
 package com.taoemily.mytodo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties(ignoreUnknown = false)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@Proxy(lazy = false)
 public class User {
     @Id
     @GeneratedValue
-    @Column(name = "uesr_id", nullable = false, unique = true)
+    @Column(name = "user_id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "uesr_name", nullable = false)
+    @Column(name = "user_name", nullable = false)
     private String username;
 
     @Column(name = "password", nullable = false)
@@ -23,14 +33,15 @@ public class User {
     @Column(name = "is_admin", nullable = false)
     private Boolean isAdmin;
 
-//    @ManyToMany
-//    private List<Todo> todoList;
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn( name ="user_id", referencedColumnName = "user_id")
+    private List<Todo> todoList= new ArrayList<>();
 
     protected User() {
-
+        super();
     }
 
-    public User(String username, String password, String email, Boolean isAdmin, List<Todo> todoList) {
+    public User(String username, String password, String email, Boolean isAdmin) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -63,7 +74,33 @@ public class User {
         return isAdmin;
     }
 
-//    public List<Todo> getTodoList() {
-//        return todoList;
-//    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
+
+
+    public List<Todo> getTodoList() {
+        return todoList;
+    }
+
+    public void setTodoList(List<Todo> todoList) {
+        this.todoList = todoList;
+    }
 }

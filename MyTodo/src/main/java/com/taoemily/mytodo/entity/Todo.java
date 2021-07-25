@@ -1,49 +1,49 @@
 package com.taoemily.mytodo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 
 @Entity
 @Table(name = "todos")
-public class Todo implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@JsonIgnoreProperties(ignoreUnknown = false)
+public class Todo {
 
     @Id
-    @Column(name="todo_id", nullable = false, unique = true)
+    @Column(name = "todo_id", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long todo_id;
 
     @Column(name = "todo_name", nullable = false)
     private String name;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
-    @Column(name="target_date", nullable = false)
+    @Column(name = "target_date", nullable = false)
     private Date date;
 
-    @Column(name="is_done", nullable = false)
+    @Column(name = "is_done", nullable = false)
     private Boolean isDone;
 
 
-    @Column(name="user_id", nullable = false)
-    private Long userId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User userId;
 
-//    @ManyToMany(mappedBy = "users")
-//    private List<User> users;
 
-    public Todo(){
+    public Todo() {
         super();
     }
-    public Todo( String name, Date date, boolean isDone, Long userId) {
+
+    public Todo(String name, Date date, boolean isDone) {
         super();
         this.date = date;
         this.name = name;
         this.isDone = isDone;
-        this.userId=userId;
+//        this.userId=userId;
 
     }
 
@@ -83,10 +83,6 @@ public class Todo implements Serializable {
         return isDone;
     }
 
-//    public List<User> getUsers() {
-//        return users;
-//    }
-
     public void setTodo_id(Long todo_id) {
         this.todo_id = todo_id;
     }
@@ -107,16 +103,13 @@ public class Todo implements Serializable {
         isDone = done;
     }
 
-    public Long getUserId() {
+    public User getUsers() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUsers(User users) {
+        this.userId = users;
     }
 
 
-//    public void setUsers(List<User> users) {
-//        this.users = users;
-//    }
 }
