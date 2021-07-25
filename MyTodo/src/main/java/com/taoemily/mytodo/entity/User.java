@@ -1,9 +1,6 @@
 package com.taoemily.mytodo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -13,7 +10,9 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @JsonIgnoreProperties(ignoreUnknown = false)
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Proxy(lazy = false)
 public class User {
     @Id
@@ -34,6 +33,8 @@ public class User {
     private Boolean isAdmin;
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JsonIgnore
+//    @JsonIdentityReference(alwaysAsId = false)
     @JoinColumn( name ="user_id", referencedColumnName = "user_id")
     private List<Todo> todoList= new ArrayList<>();
 
