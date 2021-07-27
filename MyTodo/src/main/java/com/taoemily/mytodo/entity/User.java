@@ -1,11 +1,13 @@
 package com.taoemily.mytodo.entity;
 
 import com.fasterxml.jackson.annotation.*;
+import com.taoemily.mytodo.util.UserIdResolver;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -13,6 +15,7 @@ import java.util.List;
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
+@JsonIdentityReference(alwaysAsId = true)
 @Proxy(lazy = false)
 public class User {
     @Id
@@ -42,7 +45,7 @@ public class User {
         super();
     }
 
-    public User(String username, String password, String email, Boolean isAdmin) {
+    public User( String username, String password, String email, Boolean isAdmin) {
         this.username = username;
         this.password = password;
         this.email = email;

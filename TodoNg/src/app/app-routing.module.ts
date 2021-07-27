@@ -6,10 +6,11 @@ import { LoginComponent } from './login/login.component';
 import { UserTodoComponent } from './user-todo/user-todo.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'MyTodo/:name', component: UserTodoComponent },
-  { path: 'MyTodo/:name/:projectname', component: UserTodoComponent },
+  { path: 'mytodo', component: HomeComponent },
+  { path: 'mytodo/login', component: LoginComponent },
+  { path: 'mytodo/:name', component: UserTodoComponent },
+  { path: 'mytodo/users/:name/todosById', component: UserTodoComponent },
+  // { path: 'MyTodo/:name/:projectname', component: UserTodoComponent },
   { path: '**', component: ErrorpageComponent }//this has to be the last one in the list; otherwise it will filter out anything below it
 ];
 

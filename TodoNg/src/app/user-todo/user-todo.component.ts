@@ -1,3 +1,4 @@
+import { TodoDataService } from './../service/data/todo-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,19 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserTodoComponent implements OnInit {
 
-  todo={
-    id:1,
-    description:'learn to Dance'
-  }
+  todos: UserTodoComponent[]=[];
+  // todos={
+  //   id:1,
+  //   description:'learn to Dance'
+  // }
 
-  name:string="";
+  name:number=-1;
   constructor(
     private route:Router,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.name=this.activatedRoute.snapshot.params['name'];
+    this.name=this.activatedRoute.snapshot.params['name']
   }
 
 }
