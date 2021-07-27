@@ -10,19 +10,22 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserTodoComponent } from './user-todo/user-todo.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
-import { TodolistComponent } from './todolist/todolist.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
-  declarations: [
+  declarations: [//the following components are part of the specific module
     AppComponent,
     LoginComponent,
     HomeComponent,
     UserTodoComponent,
     ErrorpageComponent,
-    TodolistComponent
+    HeaderComponent,
+    FooterComponent,
+  
   ],
-  imports: [
+  imports: [//the components in this Module need the following Module dependencies to work
     BrowserModule,
     FormsModule,
     // HttpModule,
@@ -31,6 +34,6 @@ import { TodolistComponent } from './todolist/todolist.component';
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] //when this module loads, theses bootstrap components will be loaded at the same time 
 })
 export class AppModule { }

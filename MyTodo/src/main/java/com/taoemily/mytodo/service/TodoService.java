@@ -39,14 +39,14 @@ public class TodoService {
         todoRepository.deleteTodo(id);
     }
 
-    public Todo getTodoById(Long todoId){
+    public Todo getTodoById(Long todoId) {
         return todoRepository.getById(todoId);
     }
 
     //TODO  throw exception; also check that user can't be changed!
-    public void updateTodo(Todo todo){
-        Todo toUpdate= todoRepository.getById(todo.getTodo_id());
-        if(toUpdate!=null){
+    public void updateTodo(Todo todo) {
+        Todo toUpdate = todoRepository.getById(todo.getTodo_id());
+        if (toUpdate != null) {
             toUpdate.setName(todo.getName());
             toUpdate.setDescription(todo.getDescription());
             toUpdate.setDate(todo.getDate());
@@ -62,7 +62,6 @@ public class TodoService {
 //    public Todo createTodo(Todo todo) {
 //        return todoRepository.save(todo);
 //    }
-
 
 
 }

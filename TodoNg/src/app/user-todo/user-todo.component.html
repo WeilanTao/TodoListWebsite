@@ -1,3 +1,18 @@
-<caption>user-todo works! {{name}}</caption>
+<table border="1">
+    <caption>user-todo works! {{userid}}</caption>
 
-
+    <thead>
+        <tr>
+            <th>descirption</th>
+            <th>target date</th>
+            <th>is completed</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let todo of todos">
+            <td> {{todo.description}}</td>
+            <td> {{todo.targetDate|date}} </td>
+            <td> {{todo.done}} </td>
+        </tr>
+    </tbody>
+</table>
