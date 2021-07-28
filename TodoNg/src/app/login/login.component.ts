@@ -79,5 +79,12 @@ export class LoginComponent implements OnInit {
 
   }
 
+  goSignupUser(){
+    this.loginform.reset();
+    this.loginform.setErrors(null);    
+    this.invalidLogin=false;
+    this.router.navigate(['/signup']);
+  }
+
 
 }

@@ -7,35 +7,64 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  signupform= new FormGroup({
+  signupform = new FormGroup({
     'account': new FormGroup({
-      'username': new FormControl('',[
+      'username': new FormControl('', [
         Validators.required,
         Validators.maxLength(20)
       ]),
-      'email': new FormControl('',[
+      'email': new FormControl('', [
         Validators.email,
         Validators.required
       ]),
-      'password': new FormControl('',[
+      'password': new FormControl('', [
         Validators.required
       ])
     })
   })
 
-  userExists:boolean = false;
+  isShow: boolean = false;
+
+  get username() {
+    return this.signupform.get('account.username');
+  }
+
+  get email() {
+    return this.signupform.get('account.email');
+  }
+
+  inputEmail(userEmail: HTMLInputElement) {
+    this.signupform.get('account.email')?.setValue(userEmail.value);
+  }
+
+  inputPassword(userPassword: HTMLInputElement) {
+    this.signupform.get('account.password')?.setValue(userPassword.value);
+  }
+
+  inputUsername(userName: HTMLInputElement){
+    this.signupform.get('account.username')?.setValue(userName.value);
+  }
+
+
+  get password() {
+    return this.signupform.get('account.password');
+  }
+  userExists: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
- 
+  changeShow() {
+    this.isShow = !this.isShow;
+  }
 
-  signup(){
-    let email= this.signupform.get('account.email')?.value as string;
-    if(email === "w4tao@uwaterloo.ca"){
-      this.userExists=true;
+
+  signup() {
+    let email = this.signupform.get('account.email')?.value as string;
+    if (email === "w4tao@uwaterloo.ca") {
+      this.userExists = true;
       this.signupform.reset();
     }
 
