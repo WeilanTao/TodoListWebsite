@@ -11,19 +11,19 @@ export class AuthenticationService {
 
   authenticate(emailaddress:string, passWord:string){
     if (emailaddress === "w4tao@uwaterloo.ca" && passWord === "123123") {
-      sessionStorage.setItem('authenticatedUser', emailaddress)
+      localStorage.setItem('authenticatedUser', emailaddress)
       return  true;
     }
     return false;
   }
 
   isUserLoggedIn(){
-   let user= sessionStorage.getItem('authenticatedUser');
+   let user= localStorage.getItem('authenticatedUser');
 
    return !(user===null);
   }
 
   logOut(){
-    sessionStorage.removeItem('authenticatedUser');
+    localStorage.removeItem('authenticatedUser');
   }
 }

@@ -1,3 +1,4 @@
+import { TodoService } from './../service/todo.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +9,7 @@ export class Todo{
     public todoName:string,
     public description:string, 
     public done:boolean,
-    public targetDate:Date,
+    public date:Date,
 
   ){
 
@@ -25,37 +26,24 @@ export class Todo{
 })
 export class UserTodoComponent implements OnInit {
 
-  todos=[
-    new Todo(1,'todo1','learn to dance',false,new Date()),
-    new Todo(2,'todo2','become an export',false,new Date()),
-    new Todo(3,'todo3','visit India',false,new Date),
-    new Todo(1,'todo1','learn to dance',false,new Date()),
-    new Todo(2,'todo2','become an export',false,new Date()),
-    new Todo(3,'todo3','visit India',false,new Date),
-    new Todo(1,'todo1','learn to dance',false,new Date()),
-    new Todo(2,'todo2','become an export',false,new Date()),
-    new Todo(3,'todo3','visit India',false,new Date),
-    new Todo(1,'todo1','learn to dance',false,new Date()),
-    new Todo(2,'todo2','become an export',false,new Date()),
-    new Todo(3,'todo3','visit India',false,new Date),
-    new Todo(1,'todo1','learn to dance',false,new Date()),
-    new Todo(2,'todo2','become an export',false,new Date()),
-    new Todo(3,'todo3','visit India',false,new Date),
-    new Todo(1,'todo1','learn to dance',false,new Date()),
-    new Todo(2,'todo2','become an export',false,new Date()),
-    new Todo(3,'todo3','visit India',false,new Date)
-
-  ]
+  todos:any;
   
 
   userid:number=-1;
   constructor(
     private route:Router,
     private activatedRoute:ActivatedRoute,
+    private todoService:TodoService,
   ) { }
 
   ngOnInit(): void {
-    this.userid=this.activatedRoute.snapshot.params['userid']
+    this.userid=this.activatedRoute.snapshot.params['userid'],
+
+    this.todoService.getAllTodos()
+      .subscribe(response=>{
+        this.todos=response;
+      })
+    
   }
 
 }
