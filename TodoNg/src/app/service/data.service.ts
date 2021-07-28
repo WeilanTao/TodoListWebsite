@@ -12,10 +12,15 @@ export class DataService {
     private http:HttpClient,
   ) { }
 
-  getAllTodos(){
+  getAll(){
     let param= new HttpParams();
     param= param.append("userId", 1);
     return this.http.get(this.url,  {params: param});
+  }
 
+  deleteById(id:number){
+    let param= new HttpParams();
+    param=param.append("todoId", id);
+    return this.http.delete(this.url, {params: param});
   }
 }
