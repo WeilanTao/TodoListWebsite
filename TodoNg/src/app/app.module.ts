@@ -12,6 +12,7 @@ import { UserTodoComponent } from './user-todo/user-todo.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
     ErrorpageComponent,
     HeaderComponent,
     FooterComponent,
+    SignupComponent,
   
   ],
   imports: [//the components in this Module need the following Module dependencies to work
