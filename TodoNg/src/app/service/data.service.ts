@@ -13,9 +13,20 @@ export class DataService {
   ) { }
 
   getAll(){
+    // let basicAuthHeader= this.createBasicAuthenticationHttpHeader();
+    // let header= new HttpHeaders({
+    //   Authorization:basicAuthHeader
+    // });
+
     let param= new HttpParams();
     param= param.append("userId", 1);
-    return this.http.get(this.url,  {params: param});
+
+    const httpOptions = {
+      // headers: { 'Content-Type': 'application/json' },
+      // headers:header,
+      params: param
+    };
+    return this.http.get(this.url,httpOptions);
   }
 
   deleteById(id:number){
@@ -23,4 +34,14 @@ export class DataService {
     param=param.append("todoId", id);
     return this.http.delete(this.url, {params: param});
   }
+
+  // createBasicAuthenticationHttpHeader(){
+  //   let username= "emily";
+  //   let password=  "nimda";
+
+  //   let basicAuthHeader= 'Basic '+window.btoa(username+":"+password);
+
+  //   return basicAuthHeader;
+
+  // }
 }

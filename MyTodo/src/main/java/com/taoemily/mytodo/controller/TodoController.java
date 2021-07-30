@@ -1,16 +1,15 @@
 package com.taoemily.mytodo.controller;
 
-import com.taoemily.mytodo.entity.User;
-import com.taoemily.mytodo.repository.TodoRepository;
 import com.taoemily.mytodo.entity.Todo;
 import com.taoemily.mytodo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -30,10 +29,14 @@ public class TodoController {
      * @param userId
      * @return
      */
-    @RequestMapping(method = RequestMethod.GET, path = "/users/{userName}/todos")
+    @RequestMapping(method = RequestMethod.GET, path = "/todos")
     public List<Todo> getAllTodo(@RequestParam(required = true) Long userId){
+
         return todoService.getAllTodos(userId);
     }
+
+
+
 
     /**
      * Delete one todo
@@ -83,6 +86,8 @@ public class TodoController {
 
 //        return ResponseEntity.created(uri).build();
     }
+
+
 
 
 }

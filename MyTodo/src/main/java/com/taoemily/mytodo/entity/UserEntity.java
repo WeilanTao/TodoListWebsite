@@ -15,9 +15,9 @@ import java.util.List;
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
-@JsonIdentityReference(alwaysAsId = true)
+//@JsonIdentityReference(alwaysAsId = true)
 @Proxy(lazy = false)
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue
     @Column(name = "user_id", nullable = false, unique = true)
@@ -41,11 +41,11 @@ public class User {
     @JoinColumn( name ="user_id", referencedColumnName = "user_id")
     private List<Todo> todoList= new ArrayList<>();
 
-    protected User() {
+    protected UserEntity() {
         super();
     }
 
-    public User( String username, String password, String email, Boolean isAdmin) {
+    public UserEntity(String username, String password, String email, Boolean isAdmin) {
         this.username = username;
         this.password = password;
         this.email = email;

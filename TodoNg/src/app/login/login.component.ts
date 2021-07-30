@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  login() {
+  loginHardCoded() {
     // this.loginform.setErrors({
     //   invalidLogin:true
     // });
@@ -76,6 +76,39 @@ export class LoginComponent implements OnInit {
       this.loginform.reset();
       console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
     }
+  }
+
+  // login() {
+  //   let emailaddress = this.loginform.get('account.email')?.value as string;
+  //   let passWord = this.loginform.get('account.password')?.value as string;
+  //   if (this.authenticationService.authenticate(emailaddress, passWord)) {
+  //     this.router.navigate(['user',emailaddress, 'todos']);
+  //     this.invalidLogin = false;
+  //   } else {
+  //     this.invalidLogin = true;
+  //     this.loginform.reset();
+  //     console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
+  //   }
+  // }
+
+  login() {
+    let emailaddress = this.loginform.get('account.email')?.value as string;
+    let passWord = this.loginform.get('account.password')?.value as string;
+    this.authenticationService.authenticate(emailaddress, passWord)
+      .subscribe(
+        data=>{
+          console.log(data);
+          this.router.navigate(['user',emailaddress, 'todos']);
+          this.invalidLogin = false;
+        },
+        error=>{
+          console.log(error);
+          this.invalidLogin = true;
+          this.loginform.reset();
+          console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
+        
+        }
+      )
 
   }
 

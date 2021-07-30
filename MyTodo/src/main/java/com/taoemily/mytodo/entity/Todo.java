@@ -1,9 +1,6 @@
 package com.taoemily.mytodo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -36,7 +33,7 @@ public class Todo {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User userId;
+    private UserEntity userId;
 
 
     public Todo() {
@@ -108,11 +105,11 @@ public class Todo {
         isDone = done;
     }
 
-    public User getUsers() {
+    public UserEntity getUsers() {
         return userId;
     }
 
-    public void setUsers(User users) {
+    public void setUsers(UserEntity users) {
         this.userId = users;
     }
 

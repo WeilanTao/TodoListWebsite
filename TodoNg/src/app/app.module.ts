@@ -12,7 +12,8 @@ import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpIntercepterService } from './service/http/http-intercepter.service';
 
 
 @NgModule({
@@ -35,7 +36,9 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    // {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterService, multi:true}s
+  ],
   bootstrap: [AppComponent] //when this module loads, theses bootstrap components will be loaded at the same time 
 })
 export class AppModule { }

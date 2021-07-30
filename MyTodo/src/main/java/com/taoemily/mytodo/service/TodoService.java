@@ -1,15 +1,12 @@
 package com.taoemily.mytodo.service;
 
 import com.taoemily.mytodo.entity.Todo;
-import com.taoemily.mytodo.entity.User;
 import com.taoemily.mytodo.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.nio.file.AccessDeniedException;
-import java.util.Date;
 import java.util.List;
 
 @Service
