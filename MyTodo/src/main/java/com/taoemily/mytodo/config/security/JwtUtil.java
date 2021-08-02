@@ -3,16 +3,10 @@ package com.taoemily.mytodo.config.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import java.io.Serializable;
-import java.security.Principal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,8 +26,8 @@ public class JwtUtil implements Serializable {
     }
 
     private static String doGenerateToken(Map<String, Object> claims, String subject) {
-//        Date expir= new Date(System.currentTimeMillis()+3600000L * 48);
-        Date expir = new Date(System.currentTimeMillis() + 300000); //5min
+        Date expir= new Date(System.currentTimeMillis()+3600000L * 48);
+//        Date expir = new Date(System.currentTimeMillis() + 300000); //5min
 
         return
                 Jwts.builder()
@@ -45,9 +39,15 @@ public class JwtUtil implements Serializable {
                         .compact();
     }
 
+    /**
+     * I treat email as the UserDetails.username!
+     * @param token
+     * @param userDetails
+     * @return
+     */
     public Boolean validateToken(String token, UserDetails userDetails) {
-        String username = extractUserName(token);
-        return (username.equals(userDetails.getUsername()) && !isExpir(token));
+        String email = extractUserEmail(token);
+        return (email.equals(userDetails.getUsername()) && !isExpir(token));
 
     }
 
@@ -57,7 +57,7 @@ public class JwtUtil implements Serializable {
         return claimsResolver.apply(claims);
     }
 
-    private String extractUserName(String token) {
+    public String extractUserEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
