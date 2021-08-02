@@ -1,12 +1,15 @@
 package com.taoemily.mytodo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.*;
 
-
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "todos")
 @Proxy(lazy = false)
@@ -35,18 +38,11 @@ public class Todo {
     @JoinColumn(name = "user_id")
     private UserEntity userId;
 
-
-    public Todo() {
-        super();
-    }
-
     public Todo(String name, Date date, boolean isDone) {
         super();
         this.date = date;
         this.name = name;
         this.isDone = isDone;
-//        this.userId=userId;
-
     }
 
     //return type has to be the same
@@ -64,54 +60,5 @@ public class Todo {
         }
         return true;
     }
-
-    public Long getTodo_id() {
-        return todo_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public Boolean getDone() {
-        return isDone;
-    }
-
-    public void setTodo_id(Long todo_id) {
-        this.todo_id = todo_id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public void setDone(Boolean done) {
-        isDone = done;
-    }
-
-    public UserEntity getUsers() {
-        return userId;
-    }
-
-    public void setUsers(UserEntity users) {
-        this.userId = users;
-    }
-
 
 }

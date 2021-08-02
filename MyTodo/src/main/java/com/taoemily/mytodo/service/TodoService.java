@@ -44,7 +44,7 @@ public class TodoService {
             toUpdate.setName(todo.getName());
             toUpdate.setDescription(todo.getDescription());
             toUpdate.setDate(todo.getDate());
-            toUpdate.setDone(todo.getDone());
+            toUpdate.setIsDone(todo.getIsDone());
 //            toUpdate.setUsers(todo.getUsers());
             todoRepository.save(toUpdate);
         }

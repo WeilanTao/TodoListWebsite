@@ -46,7 +46,6 @@ public class AuthService {
             LoginResponse loginResponse = new LoginResponse(token, userEntityService.getUserNameByEmail(email), email);
             return loginResponse;
         } catch (RuntimeException e) {
-//            System.out.println("hihihihihihihihihi" + e);
             throw e;
         }
     }

@@ -6,12 +6,9 @@ import com.taoemily.mytodo.dto.LoginResponse;
 import com.taoemily.mytodo.dto.SignupRequest;
 import com.taoemily.mytodo.service.AuthService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @RestController
 @AllArgsConstructor

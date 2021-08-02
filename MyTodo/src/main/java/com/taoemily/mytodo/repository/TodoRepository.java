@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
-        @Query("select todo from Todo todo where todo.userId.id=?1")
-        List<Todo> findByUserId(Long id);
+    @Query("select todo from Todo todo where todo.userId.id=?1")
+    List<Todo> findByUserId(Long id);
 
-        @Transactional
-        @Modifying
-        @Query("delete from Todo todo where todo.todo_id=?1")
-        void deleteTodo(Long id);
+    @Transactional
+    @Modifying
+    @Query("delete from Todo todo where todo.todo_id=?1")
+    void deleteTodo(Long id);
 
 
 }

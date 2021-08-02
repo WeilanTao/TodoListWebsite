@@ -1,11 +1,9 @@
 package com.taoemily.mytodo.config.security;
 
-import com.taoemily.mytodo.repository.UserRepository;
 import com.taoemily.mytodo.service.JwtUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static java.lang.String.format;
 
 @EnableWebSecurity
 @AllArgsConstructor
@@ -39,9 +36,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // configure AuthenticationManager so that it knows from where to load
-        // user for matching credentials
-        // Use BCryptPasswordEncoder
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
@@ -71,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //                .and()
 //                .logout()//默认使session无效； 清楚securitycontextholder；（转跳）
-                ;
+        ;
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

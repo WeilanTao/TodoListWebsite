@@ -5,42 +5,38 @@ import com.taoemily.mytodo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:4200/")
-//@RequestMapping("/mytodo")
 public class TodoController {
 
-   @Autowired
+    @Autowired
     TodoService todoService;
 
-   public void setTodoService(TodoService todoService){
-       this.todoService=todoService;
-   }
+    public void setTodoService(TodoService todoService) {
+        this.todoService = todoService;
+    }
 
     /**
      * Get all todos for one user
+     *
      * @param userId
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, path = "/todos")
-    public List<Todo> getAllTodo(@RequestParam(required = true) Long userId){
+    public List<Todo> getAllTodo(@RequestParam(required = true) Long userId) {
 
 
         return todoService.getAllTodos(userId);
     }
 
 
-
-
     /**
      * Delete one todo
+     *
      * @param todoId
      */
     @DeleteMapping("/users/{username}/todos")
@@ -50,33 +46,34 @@ public class TodoController {
 
     /**
      * get a todo by id
+     *
      * @param todoId
      * @return
      */
     @GetMapping("/users/{username}/todobyid")
-    private Todo getTodoById(@RequestParam(required = true)Long todoId){
+    private Todo getTodoById(@RequestParam(required = true) Long todoId) {
         return todoService.getTodoById(todoId);//Here @RequestParam is receiving query parameters! not Json!!!
     }
 
     /**
      * Update a todo
+     *
      * @param todo
      * @return
      */
-    @PutMapping(path="/users/{username}/todos", consumes = {"application/json"})
+    @PutMapping(path = "/users/{username}/todos", consumes = {"application/json"})
     public ResponseEntity<Todo> updateTodo(
-            @RequestBody Todo todo){
+            @RequestBody Todo todo) {
         todoService.updateTodo(todo);
         return new ResponseEntity<Todo>(todo, HttpStatus.OK);
     }
 
 
-
-    @PostMapping(path="/users/{userid}/todos")
+    @PostMapping(path = "/users/{userid}/todos")
     public Todo createTodo(
-            @PathVariable long userid, @RequestBody Todo todo){
+            @PathVariable long userid, @RequestBody Todo todo) {
 
-       //Here in the Json Todo object, the property todo_id  can be omitted; since the Todo entity generates the id automatically!!!
+        //Here in the Json Todo object, the property todo_id  can be omitted; since the Todo entity generates the id automatically!!!
 //        return todoService.createTodo(todo);
         return null;
 
@@ -87,8 +84,6 @@ public class TodoController {
 
 //        return ResponseEntity.created(uri).build();
     }
-
-
 
 
 }

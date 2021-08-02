@@ -11,7 +11,7 @@ public class UserEntityService {
     @Autowired
     private UserRepository userRepository;
 
-    public String getUserNameByEmail(String email){
+    public String getUserNameByEmail(String email) {
         return userRepository.getUserNameByEmail(email);
     }
 
