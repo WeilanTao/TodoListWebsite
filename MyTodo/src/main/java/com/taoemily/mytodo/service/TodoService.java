@@ -14,9 +14,6 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    @Autowired
-    private UserService userService;
-
     @PersistenceContext
     private EntityManager entityManager;
 

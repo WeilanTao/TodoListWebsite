@@ -32,6 +32,7 @@ public class TodoController {
     @RequestMapping(method = RequestMethod.GET, path = "/todos")
     public List<Todo> getAllTodo(@RequestParam(required = true) Long userId){
 
+
         return todoService.getAllTodos(userId);
     }
 

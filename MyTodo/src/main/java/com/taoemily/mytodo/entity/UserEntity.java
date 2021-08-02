@@ -1,8 +1,8 @@
 package com.taoemily.mytodo.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import com.taoemily.mytodo.util.UserIdResolver;
 import org.hibernate.annotations.Proxy;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,13 +19,14 @@ import java.util.List;
 @Proxy(lazy = false)
 public class UserEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false, unique = true)
     private Long id;
 
     @Column(name = "user_name", nullable = false)
     private String username;
 
+//    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -107,4 +108,6 @@ public class UserEntity {
     public void setTodoList(List<Todo> todoList) {
         this.todoList = todoList;
     }
+
+
 }
