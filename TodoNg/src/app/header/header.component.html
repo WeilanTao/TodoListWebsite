@@ -1,0 +1,25 @@
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <div class="navbar-brand">
+                <a href="/" class="nav-link">MyTodo</a>
+            </div>
+            
+                <ul class=" nav navbar-nav ">
+                    <ul class="breadcrumb">
+                        <li><a href="/home" class="nav-link">Pricing</a></li>
+                        <li><a href="/home" class="nav-link">Source Code</a></li>
+                        <li><a href="/home" class="nav-link">Contact Emily</a></li>
+                    </ul>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a *ngIf="!authenticationService.isUserLoggedIn()" href="/login" class="nav-link">login</a></li>
+                    <li><a *ngIf="authenticationService.isUserLoggedIn()" (click)="authenticationService.logOut()" href="" class="nav-link">logout</a></li>
+                </ul>
+
+        </div>
+    </div>
+
+</nav>

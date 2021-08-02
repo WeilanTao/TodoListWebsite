@@ -1,4 +1,3 @@
-// import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -10,27 +9,36 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserTodoComponent } from './user-todo/user-todo.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
-import { TodolistComponent } from './todolist/todolist.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { SignupComponent } from './signup/signup.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpIntercepterService } from './service/http/http-intercepter.service';
 
 
 @NgModule({
-  declarations: [
+  declarations: [//the following components are part of the specific module
     AppComponent,
     LoginComponent,
     HomeComponent,
     UserTodoComponent,
     ErrorpageComponent,
-    TodolistComponent
+    HeaderComponent,
+    FooterComponent,
+    SignupComponent,
+  
   ],
-  imports: [
+  imports: [//the components in this Module need the following Module dependencies to work
     BrowserModule,
     FormsModule,
-    // HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     RouterModule,
     ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    // {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterService, multi:true}s
+  ],
+  bootstrap: [AppComponent] //when this module loads, theses bootstrap components will be loaded at the same time 
 })
 export class AppModule { }

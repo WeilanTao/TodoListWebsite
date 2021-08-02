@@ -1,10 +1,19 @@
-<form [formGroup]="loginform" (ngSubmit)="login()">
-    <h2 class="form-signin-heading">Please sign in</h2>
+<form [formGroup]="signupform" (ngSubmit)="signup()">
+    <h2 >Sign Up</h2>
 
     <div formGroupName="account">
+        <div class="username">
+            <label for="account">User name</label>
+            <input type="input" id="username" name="username" class="form-control" placeholder="User name"
+                formControlName="username" #userName (input)="inputUsername(userName)">
+            <div *ngIf="username?.touched && username?.invalid" class="alert alert-danger">
+                <div *ngIf="username?.errors?.required">Email can't be empty</div>
+                <div *ngIf="username?.errors?.maxLength">User name too long</div>
+            </div>
+        </div>
+
         <div class="email">
             <label for="account">Email address</label>
-            <!--sr-only improve accessbility by reading the content for disabilities by screen reader-->
             <input type="email" id="email" name="email" class="form-control" placeholder="Email address"
                 formControlName="email" #userEmail (input)="inputEmail(userEmail)">
             <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
@@ -35,16 +44,13 @@
             </div>
         </div>
 
-        <p>FromGroupValues: {{ loginform.value | json }}</p>
+        <p>FromGroupValues: {{ signupform.value | json }}</p>
     </div>
 
-    <div *ngIf="invalidLogin && !password?.touched && !email?.touched" class="alert alert-danger">
-        Invalid username and/or password.
+    <div *ngIf="userExists && !password?.touched && !email?.touched && !username?.touched " class="alert alert-danger">
+        User already exists.
     </div>
 
-    <button [disabled]="!loginform.valid" class="btn btn-lg btn-primary btn-block" type="submit">Yep!</button>
-
-    <button class="btn btn-lg btn-primary btn-block" (click)="goSignupUser()" type="button">SignUp</button>
-
+    <button [disabled]="!signupform.valid" class="btn btn-lg btn-primary btn-block" type="submit">Sign me up</button>
 
 </form>

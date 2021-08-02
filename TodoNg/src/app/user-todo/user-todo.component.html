@@ -1,3 +1,24 @@
-<caption>user-todo works! {{name}}</caption>
+<table border="1">
+    <caption>user-todo works! {{userid}}</caption>
 
-
+    <thead>
+        <tr>
+            <th>todoId</th>
+            <th>name</th>
+            <th>descirption</th>
+            <th>target date</th>
+            <th>is completed</th>
+        </tr>
+    </thead>
+    <div *ngIf="isDeleted">Todo has been deleted</div>
+    <tbody>
+        <tr *ngFor="let todo of todos">
+            <td> {{todo.todo_id}} </td>
+            <td> {{todo.name}} </td>
+            <td> {{todo.description}}</td>
+            <td> {{todo.date|date}} </td>
+            <td> {{todo.done}} </td>
+            <td> <button (click)="deleteTodo(todo.todo_id)" class= "btn btn-warning"> Delete </button></td>
+        </tr>
+    </tbody>
+</table>

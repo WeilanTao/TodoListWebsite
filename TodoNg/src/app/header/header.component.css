@@ -1,0 +1,23 @@
+.navbar {
+    min-height: 5px;
+  }
+.navbar-brand{
+    color: rgb(39, 39, 145);
+    height: 0px;
+    line-height: 5px;
+}
+
+.navbar-right {
+    display: flex;
+    position:absolute;
+    right:8%;
+    top:-20%;
+  }
+
+  .nav .breadcrumb {
+    margin: 0 7px;
+}
+
+a{
+    font-size: 12px;
+}
