@@ -3,9 +3,12 @@ package com.taoemily.mytodo.config.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,6 +16,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
+@Slf4j
 public class JwtUtil implements Serializable {
     private static final String SECRET_KEY="mytodo123web321java123321springbootemilyweilantao" +
             "123456789987654321emilycodingmytodowebsitehappyhourdsjakldjsakl";
@@ -39,6 +43,17 @@ public class JwtUtil implements Serializable {
                         .compact();
     }
 
+    public static String generateTokenByEmail(String subject){
+        Date refreshRexpir= new Date(System.currentTimeMillis() + 600000); //10min
+
+        return Jwts.builder()
+                .setSubject(subject)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(refreshRexpir)
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .compact();
+    }
+
     /**
      * I treat email as the UserDetails.username!
      * @param token
@@ -46,9 +61,13 @@ public class JwtUtil implements Serializable {
      * @return
      */
     public Boolean validateToken(String token, UserDetails userDetails) {
-        String email = extractUserEmail(token);
-        return (email.equals(userDetails.getUsername()) && !isExpir(token));
-
+       try {
+           String email = extractUserEmail(token);
+           return (StringUtils.hasText(email) && email.equals(userDetails.getUsername()) && !isExpir(token));
+       }catch (RuntimeException e){
+           log.error(e.toString());
+       }
+       return false;
     }
 
 
@@ -65,5 +84,7 @@ public class JwtUtil implements Serializable {
         Date date = extractClaim(token, Claims::getExpiration);
         return date.before(new Date());
     }
+
+
 
 }

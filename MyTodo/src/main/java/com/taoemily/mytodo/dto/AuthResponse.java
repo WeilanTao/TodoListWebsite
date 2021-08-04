@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponse implements Serializable {
-    private String authenticationToken;
+public class AuthResponse implements Serializable {
+    private String accessToken;
     private String username;
     private String useremail;
-    private String userid;
+    private String refreshToken;
+    private String role;
 }
