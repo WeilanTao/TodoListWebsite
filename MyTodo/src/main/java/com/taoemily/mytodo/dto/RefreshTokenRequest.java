@@ -1,20 +1,15 @@
 package com.taoemily.mytodo.dto;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class SignupRequest {
+public class RefreshTokenRequest {
     @NotBlank
-    String username;
+    private String useremail;
     @NotBlank
-    String useremail;
-    @NotBlank
-    String password;
+    private String refreshtoken;
 }

@@ -1,8 +1,11 @@
 package com.taoemily.mytodo.config.security;
 
 import com.taoemily.mytodo.service.JwtUserDetailsService;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +22,7 @@ import java.io.IOException;
 
 @Component
 @AllArgsConstructor
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
@@ -28,30 +32,34 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        //get the token form the request header
-        String bToken = httpServletRequest.getHeader("Authorization");
-        String token = "";
-        String email = "";
 
-        if (StringUtils.hasText(bToken) && bToken.startsWith("Bearer ")) {
-            token = bToken.substring(7);
-            try {
-                email = jwtUtil.extractUserEmail(token);
-            } catch (RuntimeException e) {
-            }
+        try {
+            //get the token form the request header
+            String bToken = httpServletRequest.getHeader("Authorization");
+            String token = "";
+            String email = "";
 
-            if (StringUtils.hasText(email) && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(email);
+            if (StringUtils.hasText(bToken) && bToken.startsWith("Bearer ")) {
+                token = bToken.substring(7);
+                try {
+                    email = jwtUtil.extractUserEmail(token);
+                } catch (RuntimeException e) {
+                }
 
-                if (jwtUtil.validateToken(token, userDetails)) {
-                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                if (StringUtils.hasText(email) && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(email);
+
+                    if (jwtUtil.validateToken(token, userDetails)) {
+                        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                        usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                    }
                 }
             }
+        }catch(RuntimeException e){
+
         }
 
         filterChain.doFilter(httpServletRequest, httpServletResponse);
-
     }
 }

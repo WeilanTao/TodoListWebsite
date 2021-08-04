@@ -14,11 +14,11 @@ public class UserEntityService {
     @Autowired
     private UserRepository userRepository;
 
-    public String getUserNameByEmail(String email) {
-        return userRepository.getUserNameByEmail(email);
-    }
-    public String getUserIdByEmail(String email) {
-        return userRepository.getUserIdByEmail(email);
+    public UserEntity getUserByEmail(String email) {
+        UserEntity userEntity= userRepository.getUserByEmail(email)
+                .orElseThrow(()->new RuntimeException("No user found Invalid User email account"));
+
+        return userEntity;
     }
 
     public List<UserEntity> getAllUser(){
