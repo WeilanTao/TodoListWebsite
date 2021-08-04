@@ -17,11 +17,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> loginUser(@RequestBody LoginRequest loginRequest) {
+//TODO 数据库没链接抛异常?
         try {
             LoginResponse user = authService.login(loginRequest);
             return ResponseEntity.ok(user);
         } catch (Exception e) {
             e.printStackTrace();
+//            return  ResponseEntity.badRequest().body(e);
         }
 
         return ResponseEntity.status(401).body("Invald user");
@@ -33,8 +35,11 @@ public class AuthController {
         try {
             return ResponseEntity.ok(authService.saveNewUser(signupRequest));
         } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.status(409).body("User already exists");
+
+//TODO 数据库里报错 409 duplicate user
+//        return ResponseEntity.status(409).body("User already exists");
     }
 
 }

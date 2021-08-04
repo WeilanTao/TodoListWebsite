@@ -45,10 +45,12 @@ public class JwtUserDetailsService implements org.springframework.security.core.
         UserEntity userEntity = getUserEntityOptional.orElseThrow(
                 () -> new UsernameNotFoundException("No user found with email : " + email));
 
+        String role = userEntity.getIsAdmin()? "ADMIN":"USER";
+
         UserDetails userDetails =
                 User.withUsername(userEntity.getEmail())
                         .password(userEntity.getPassword())
-                        .authorities(getAuthorities("USER"))
+                        .authorities(getAuthorities(role))
                         .build();
         return userDetails;
     }

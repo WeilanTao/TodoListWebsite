@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -23,16 +24,14 @@ public class TodoController {
     /**
      * Get all todos for one user
      *
-     * @param userId
+     * @param
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, path = "/todos")
-    public List<Todo> getAllTodo(@RequestParam(required = true) Long userId) {
-
-
-        return todoService.getAllTodos(userId);
+    public List<Todo> getAllTodo(Principal principal) {
+        String email = principal.getName();
+        return todoService.getAllTodosForAUser(email);
     }
-
 
     /**
      * Delete one todo
