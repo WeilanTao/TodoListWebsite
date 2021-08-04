@@ -1,14 +1,16 @@
 package com.taoemily.mytodo.entity;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Proxy;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 @JsonIgnoreProperties(ignoreUnknown = false)
@@ -26,7 +28,7 @@ public class UserEntity {
     @Column(name = "user_name", nullable = false)
     private String username;
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -36,77 +38,22 @@ public class UserEntity {
     @Column(name = "is_admin", nullable = false)
     private Boolean isAdmin;
 
-    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JsonIgnore
 //    @JsonIdentityReference(alwaysAsId = false)
-    @JoinColumn( name ="user_id", referencedColumnName = "user_id")
-    private List<Todo> todoList= new ArrayList<>();
-
-    protected UserEntity() {
-        super();
-    }
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private List<Todo> todoList = new ArrayList<>();
 
     public UserEntity(String username, String password, String email, Boolean isAdmin) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.isAdmin = isAdmin;
-//        this.todoList = todoList;
     }
 
     @Override
     public String toString() {
         return super.toString();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
-    }
-
-
-
-    public List<Todo> getTodoList() {
-        return todoList;
-    }
-
-    public void setTodoList(List<Todo> todoList) {
-        this.todoList = todoList;
     }
 
 

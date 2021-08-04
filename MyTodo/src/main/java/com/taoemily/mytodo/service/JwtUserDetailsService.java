@@ -32,6 +32,7 @@ public class JwtUserDetailsService implements org.springframework.security.core.
 
     /**
      * Here the usermame is email
+     *
      * @param email
      * @return
      * @throws UsernameNotFoundException
@@ -42,12 +43,14 @@ public class JwtUserDetailsService implements org.springframework.security.core.
         Optional<UserEntity> getUserEntityOptional = userRepository.getUserByEmail(email);
 
         UserEntity userEntity = getUserEntityOptional.orElseThrow(
-                ()-> new UsernameNotFoundException("No user found with email : "+ email));
+                () -> new UsernameNotFoundException("No user found with email : " + email));
 
-        UserDetails userDetails=
+        String role = userEntity.getIsAdmin()? "ADMIN":"USER";
+
+        UserDetails userDetails =
                 User.withUsername(userEntity.getEmail())
                         .password(userEntity.getPassword())
-                        .authorities(getAuthorities("USER"))
+                        .authorities(getAuthorities(role))
                         .build();
         return userDetails;
     }

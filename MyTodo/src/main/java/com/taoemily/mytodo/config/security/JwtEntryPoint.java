@@ -18,6 +18,6 @@ public class JwtEntryPoint implements AuthenticationEntryPoint, Serializable {
                          HttpServletResponse httpServletResponse,
                          AuthenticationException e) throws IOException {
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-                "401 Unauthorized"+e.getMessage());
+                "401 Unauthorized " + e.getMessage());
     }
 }

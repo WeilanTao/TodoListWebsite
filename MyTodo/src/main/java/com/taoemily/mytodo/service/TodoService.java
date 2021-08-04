@@ -1,8 +1,11 @@
 package com.taoemily.mytodo.service;
 
 import com.taoemily.mytodo.entity.Todo;
+import com.taoemily.mytodo.entity.UserEntity;
 import com.taoemily.mytodo.repository.TodoRepository;
+import com.taoemily.mytodo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -13,6 +16,9 @@ import java.util.List;
 public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -25,8 +31,10 @@ public class TodoService {
 //        return todoRepository.save(todo);
 //    }
 
-    public List<Todo> getAllTodos(Long userId) {
-        return todoRepository.findByUserId(userId);
+    public List<Todo> getAllTodosForAUser(String email) {
+        UserEntity userEntity= userRepository.getUserByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException("No user found with email : " + email));
+        return todoRepository.findByUserId(userEntity.getId());
     }
 
     public void deleteTodo(Long id) {
@@ -44,7 +52,7 @@ public class TodoService {
             toUpdate.setName(todo.getName());
             toUpdate.setDescription(todo.getDescription());
             toUpdate.setDate(todo.getDate());
-            toUpdate.setDone(todo.getDone());
+            toUpdate.setIsDone(todo.getIsDone());
 //            toUpdate.setUsers(todo.getUsers());
             todoRepository.save(toUpdate);
         }

@@ -9,6 +9,7 @@ import com.taoemily.mytodo.config.security.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,10 +44,17 @@ public class AuthService {
 
             String token = jwtUtil.generateToken(authenticate);
 
-            LoginResponse loginResponse = new LoginResponse(token, userEntityService.getUserNameByEmail(email), email);
+
+            String useremail = userEntityService.getUserNameByEmail(email);
+            String userid = userEntityService.getUserIdByEmail(email);
+
+            LoginResponse loginResponse = new LoginResponse(
+                    token,
+                    useremail,
+                    userid,
+                    email);
             return loginResponse;
         } catch (RuntimeException e) {
-//            System.out.println("hihihihihihihihihi" + e);
             throw e;
         }
     }
@@ -58,7 +66,7 @@ public class AuthService {
                 signupRequest.getUsername(),
                 pw,
                 signupRequest.getUseremail(),
-                true);
+                false);
         UserEntity savedUser = userRepository.saveAndFlush(userEntity);
 
         return savedUser;

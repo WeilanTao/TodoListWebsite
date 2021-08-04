@@ -26,8 +26,8 @@ public class JwtUtil implements Serializable {
     }
 
     private static String doGenerateToken(Map<String, Object> claims, String subject) {
-        Date expir= new Date(System.currentTimeMillis()+3600000L * 48);
-//        Date expir = new Date(System.currentTimeMillis() + 300000); //5min
+//        Date expir= new Date(System.currentTimeMillis()+3600000L * 48);
+        Date expir = new Date(System.currentTimeMillis() + 300000); //5min
 
         return
                 Jwts.builder()
