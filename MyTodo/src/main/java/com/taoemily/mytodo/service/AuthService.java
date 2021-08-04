@@ -77,6 +77,9 @@ public class AuthService {
     }
 
     public AuthResponse generateRefreshToken(RefreshTokenRequest refreshTokenRequest){
+
+        System.out.println(SecurityContextHolder.getContext().toString());
+
         //get the refresh token from the payload
         String payloadRefreshToken= refreshTokenRequest.getRefreshtoken();
         try{
@@ -106,8 +109,8 @@ public class AuthService {
 
     public void deleteRefreshToken(RefreshTokenRequest refreshTokenRequest){
         refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshtoken());
-        //should I clean the securitycontextholder? logout 后 再refreshtoken ； todo 看看会不会打印出来东西
-
+        //should I clean the securitycontextholder? logout 后 再refreshtoken 看看会不会打印出来东西
+        //此时测admin 和 todo都没用 因为没有access token 无法打印出来东西
     }
 
 }
