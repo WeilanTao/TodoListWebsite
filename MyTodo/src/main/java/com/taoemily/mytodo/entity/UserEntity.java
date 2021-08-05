@@ -28,7 +28,7 @@ public class UserEntity {
     @Column(name = "user_name", nullable = false)
     private String username;
 
-    //    @JsonIgnore
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -45,11 +45,11 @@ public class UserEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private List<Todo> todoList = new ArrayList<>();
 
-    //    @JsonIgnore
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //按理说这个的意思书在UserEntity这张表中， 会有refreshtoken这一栏， 指向RefreshToken这张表里面的userId这一栏
-    @JoinColumn(name = "refreshtoken", referencedColumnName = "user")
-    private String refreshtoken;
+    //按理说这个的意思书在UserEntity这张表中， user_id这一栏指向RefreshToken这张表里面的userId这一栏
+    @JoinColumn(name = "user_id", referencedColumnName = "user")
+    private RefreshToken refreshtoken;
 
     public UserEntity(String username, String password, String email, Boolean isAdmin) {
         this.username = username;

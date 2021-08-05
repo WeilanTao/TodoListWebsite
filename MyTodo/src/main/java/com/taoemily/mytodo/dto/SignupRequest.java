@@ -17,4 +17,6 @@ public class SignupRequest {
     String useremail;
     @NotBlank
     String password;
+    @NotBlank
+    Boolean isAdmin;
 }

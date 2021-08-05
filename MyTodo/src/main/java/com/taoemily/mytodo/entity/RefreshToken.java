@@ -4,6 +4,7 @@ package com.taoemily.mytodo.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -12,6 +13,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Entity
 @Table(name="refreshtokens")
+@Proxy(lazy = false)
 @JsonIgnoreProperties(ignoreUnknown = false)
 public class RefreshToken {
     @Id

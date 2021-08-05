@@ -58,7 +58,7 @@ public class HibernateConfig {
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", DIALECT);
         hibernateProperties.put("hibernate.show_sql", SHOW_SQL);
-//        hibernateProperties.put("hibernate.hbm2ddl.auto", HIBERNATE_HBM2DDL_AUTO);
+        hibernateProperties.put("hibernate.hbm2ddl.auto", HBM2DDL_AUTO);
         sessionFactory.setHibernateProperties(hibernateProperties);
         return sessionFactory;
     }
