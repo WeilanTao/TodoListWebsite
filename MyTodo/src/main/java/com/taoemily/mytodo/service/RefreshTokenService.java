@@ -4,6 +4,7 @@ import com.taoemily.mytodo.entity.RefreshToken;
 import com.taoemily.mytodo.entity.UserEntity;
 import com.taoemily.mytodo.repository.RefreshTokenRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor
 public class RefreshTokenService {
 
     @Value("${jwt.refershtoken.expir.ms}")
@@ -32,20 +34,20 @@ public class RefreshTokenService {
         return refreshtoken;
     }
 
-    public String verifyRefreshToken(String payloadRefreshToken){
+    public RefreshToken verifyRefreshToken(String payloadRefreshToken){
         //check the refreshtoken is in the database
         RefreshToken refreshToken= refreshTokenRepository.findByRefreshToken(payloadRefreshToken)
                 .orElseThrow(()->new RuntimeException("No such token in database"));
 
         //check the expiry date of therefeshtoken; delete it if expires
         Instant instant = refreshToken.getExpiryDate();
-        String email =refreshToken.getUser().getEmail();
+//        String email =refreshToken.getUser().getEmail();
         if(instant.compareTo(Instant.now()) < 0){
             deleteRefreshToken(payloadRefreshToken);
             throw new RuntimeException("refresh token expires");
         }
 
-        return email;
+        return refreshToken;
     }
 
     public void deleteRefreshToken(String token ){

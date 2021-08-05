@@ -11,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 
-@RestController("/auth")
+@RestController
+@RequestMapping("/auth")
 @AllArgsConstructor
 public class AuthController {
     private AuthService authService;
@@ -48,6 +50,7 @@ public class AuthController {
     @PostMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
 
+//        System.out.println("============="+principal.toString()); Here the principle is null!
         try {
             AuthResponse authResponse = authService.generateRefreshToken(refreshTokenRequest);
             return ResponseEntity.ok(authResponse);

@@ -4,6 +4,7 @@ import com.taoemily.mytodo.dto.LoginRequest;
 import com.taoemily.mytodo.dto.AuthResponse;
 import com.taoemily.mytodo.dto.RefreshTokenRequest;
 import com.taoemily.mytodo.dto.SignupRequest;
+import com.taoemily.mytodo.entity.RefreshToken;
 import com.taoemily.mytodo.entity.UserEntity;
 import com.taoemily.mytodo.repository.UserRepository;
 import com.taoemily.mytodo.config.security.JwtUtil;
@@ -70,7 +71,7 @@ public class AuthService {
                 signupRequest.getUsername(),
                 pw,
                 signupRequest.getUseremail(),
-                false);
+                signupRequest.getIsAdmin());
         UserEntity savedUser = userRepository.saveAndFlush(userEntity);
 
         return savedUser;
@@ -78,27 +79,25 @@ public class AuthService {
 
     public AuthResponse generateRefreshToken(RefreshTokenRequest refreshTokenRequest){
 
-        System.out.println(SecurityContextHolder.getContext().toString());
-
         //get the refresh token from the payload
         String payloadRefreshToken= refreshTokenRequest.getRefreshtoken();
         try{
             //check if the refresh token is in the database; check if the refresh token is expired
-            String email = refreshTokenService.verifyRefreshToken(payloadRefreshToken); //check the refresh token is in the database; check the refresh token is not expired and return the user email as a response if it's valid
+            RefreshToken refreshToken= refreshTokenService.verifyRefreshToken(payloadRefreshToken);//check the refresh token is in the database; check the refresh token is not expired and return the user email as a response if it's valid
+            UserEntity userEntity= refreshToken.getUser();
+            String email =  userEntity.getEmail();
 
             //if the refersh token is in the database && the refresh token is not expired, let's generate a new access token
             String newAccessToken = jwtUtil.generateTokenByEmail(email);
-
-            System.out.println(SecurityContextHolder.getContext().toString());
 
             //return the response with a new accesstoken and the refresh token from the payload
             return new AuthResponse(
 
                     newAccessToken,
-                    "testusername",
-                    "testemail",
-                     payloadRefreshToken,
-                    "testrole");
+                    userEntity.getUsername(),
+                    userEntity.getEmail(),
+                    payloadRefreshToken,
+                    userEntity.getIsAdmin()?"ADMIN":"USER");
 
         }catch(RuntimeException exception){
             //TODO exception: what if the token is not in database
@@ -108,9 +107,8 @@ public class AuthService {
     }
 
     public void deleteRefreshToken(RefreshTokenRequest refreshTokenRequest){
+        //Here the SecurityContextHolder.getContext() is Authentication=AnonymousAuthenticationToken
         refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshtoken());
-        //should I clean the securitycontextholder? logout 后 再refreshtoken 看看会不会打印出来东西
-        //此时测admin 和 todo都没用 因为没有access token 无法打印出来东西
     }
 
 }
