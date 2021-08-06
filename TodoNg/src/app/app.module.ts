@@ -1,3 +1,4 @@
+import { ErrorHandler } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -14,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpIntercepterService } from './service/http/http-intercepter.service';
+import { AppErrorHandler } from './common/app-error-handler';
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import { HttpIntercepterService } from './service/http/http-intercepter.service'
     ReactiveFormsModule
   ],
   providers: [
+    {provide: ErrorHandler, useClass:AppErrorHandler} //whenever you are using errorhandle in the project, use AppErrorHandler instead
     // {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterService, multi:true}s
   ],
   bootstrap: [AppComponent] //when this module loads, theses bootstrap components will be loaded at the same time 
