@@ -85,11 +85,10 @@ export class SignupComponent implements OnInit {
       .subscribe(data=>{
         console.log(data);
       },(error: AppError)=>{
+        this.signupform.reset();
 
         if(error instanceof ConflictError){
-
-        this.userExists = true;
-        this.signupform.reset();
+          this.userExists = true;
         }else{
           this.signupform.setErrors(error.originalError);
           throw error;
