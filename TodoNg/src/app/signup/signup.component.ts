@@ -1,3 +1,8 @@
+import { ConflictError } from './../common/409error';
+import { NotFoundError } from './../common/404error';
+import { AppError } from './../common/app-error';
+import { AuthService } from './../service/auth/auth.service';
+import { SignupRequestPayload } from './signup-request.payload';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,6 +12,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+
+  signupRequestPayload:SignupRequestPayload;
+
   signupform = new FormGroup({
     'account': new FormGroup({
       'username': new FormControl('', [
@@ -51,7 +59,14 @@ export class SignupComponent implements OnInit {
   }
   userExists: boolean = false;
 
-  constructor() { }
+  constructor(private authService:AuthService) {
+    this.signupRequestPayload={
+      username:'',
+      useremail:'',
+      password: '',
+      isAdmin: false
+    }
+   }
 
   ngOnInit(): void {
   }
@@ -60,14 +75,26 @@ export class SignupComponent implements OnInit {
     this.isShow = !this.isShow;
   }
 
-
   signup() {
-    let email = this.signupform.get('account.email')?.value as string;
-    if (email === "w4tao@uwaterloo.ca") {
-      this.userExists = true;
-      this.signupform.reset();
-    }
+    this.signupRequestPayload.useremail = this.signupform.get('account.email')?.value as string;
+    this.signupRequestPayload.username=this.signupform.get('account.username')?.value as string;
+    this.signupRequestPayload.password=this.signupform.get('account.password')?.value as string;
+    this.signupRequestPayload.isAdmin= false;
 
+    this.authService.signup(this.signupRequestPayload)
+      .subscribe(data=>{
+        console.log(data);
+      },(error: AppError)=>{
+
+        if(error instanceof ConflictError){
+
+        this.userExists = true;
+        this.signupform.reset();
+        }else{
+          this.signupform.setErrors(error.originalError);
+          throw error;
+        }
+      })
   }
 
 }

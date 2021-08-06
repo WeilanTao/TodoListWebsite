@@ -16,6 +16,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin("http://localhost:4200/")
 @AllArgsConstructor
 public class AuthController {
     private AuthService authService;
@@ -37,14 +38,16 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> signupUser(@Valid @RequestBody SignupRequest signupRequest) {
+//        System.out.println(signupRequest.toString());
         try {
-            return ResponseEntity.ok(authService.saveNewUser(signupRequest));
+            authService.saveNewUser(signupRequest);
+            return ResponseEntity.status(200).body("signed up successfully");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.status(409).body("User already exists");
         }
 
 //TODO 数据库里报错 409 duplicate user
-//        return ResponseEntity.status(409).body("User already exists");
+//        c
     }
 
     @PostMapping("/refreshtoken")

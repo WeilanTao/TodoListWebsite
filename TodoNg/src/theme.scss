@@ -1,8 +1,31 @@
+@use '~@angular/material' as mat;
 
-@use "~@angular/material/theming" as mat;
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 
-@include mat-core();
 
-$app-primary: mat.define-palette(mat.$indigo-palette, 500);
-$app-accent: mat.define-palette(mat.$orange-platte, 600);
+
+// $color:blue;
+// h1{ 
+//     color: $color
+// }
+// h2{ 
+//     color: $color
+// }
+
+// @mixin soft-border($border-radius){
+//     border: 1px solid #ccc;
+//     border-radius:$border-radius;
+//     padding: 10px;
+// }
+// .box{
+//   @include soft-border(5px);
+// }
+
+// .modern-box{
+//     @include soft-border(10px);
+// }
+

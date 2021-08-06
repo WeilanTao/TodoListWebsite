@@ -24,13 +24,6 @@ export class AuthenticationService {
     private http:HttpClient
   ) {}
 
-  // authenticate(emailaddress:string, passWord:string){
-  //   if (emailaddress === "w4tao@uwaterloo.ca" && passWord === "123123") {
-  //     localStorage.setItem('authenticatedUser', emailaddress)
-  //     return  true;
-  //   }
-  //   return false;
-  // }
 
   authenticate(email:string, passWord:string){
     let authHeaderString= 'Basic '+window.btoa(email+":"+passWord);
