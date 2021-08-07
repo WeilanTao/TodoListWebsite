@@ -8,7 +8,7 @@ export class Todo{
     public todo_id:number,
     public todoName:string,
     public description:string, 
-    public done:boolean,
+    public isDone:boolean,
     public date:Date,
 
   ){
@@ -30,7 +30,7 @@ export class UserTodoComponent implements OnInit {
   isDeleted= false;
   
 
-  userid:number=-1;
+  username:string='';
   constructor(
     private route:Router,
     private activatedRoute:ActivatedRoute,
@@ -38,15 +38,17 @@ export class UserTodoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userid=this.activatedRoute.snapshot.params['userid'];
+
+    this.username=this.activatedRoute.snapshot.params['username'];
 
     this.loadTodoList();
     
   }
 
   loadTodoList(){
-    this.todoService.getAll()
+    this.todoService.getAllTodoForUser()
       .subscribe(response=>{
+        console.log(response);
         this.todos=response;
       })
     
@@ -55,13 +57,13 @@ export class UserTodoComponent implements OnInit {
 
   //TODO: Autohide alert box~animation
   deleteTodo(id:number){
-    this.todoService.deleteById(id)
-      .subscribe(
-        response=>{
-          this.isDeleted=true;
-          this.loadTodoList();
-        }
-      );
+    // this.todoService.deleteById(id)
+    //   .subscribe(
+    //     response=>{
+    //       this.isDeleted=true;
+    //       this.loadTodoList();
+    //     }
+    //   );
   }
 
 

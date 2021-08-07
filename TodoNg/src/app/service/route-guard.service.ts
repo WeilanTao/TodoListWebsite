@@ -1,4 +1,4 @@
-import { AuthenticationService } from './authentication.service';
+import { AuthService } from './auth/auth.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,15 +10,16 @@ import { Router } from '@angular/router';
 export class RouteGuardService implements CanActivate {
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authService: AuthService,
     private router:Router
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if (this.authenticationService.isUserLoggedIn())
+    if (this.authService.isUserLoggedIn())
       return true;
 
-    this.router.navigate([""]);
+      //TODO: add  a tost thatindicates authentication failure 
+    this.router.navigate(["/login"]);
     return false;
   }
 

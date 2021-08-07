@@ -29,6 +29,7 @@ public class TodoController {
      */
     @RequestMapping(method = RequestMethod.GET, path = "/todos")
     public List<Todo> getAllTodo(Principal principal) {
+        System.out.println("hihihihihi"+principal);
         String email = principal.getName();
         return todoService.getAllTodosForAUser(email);
     }

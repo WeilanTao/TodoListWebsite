@@ -51,6 +51,7 @@ public class RefreshTokenService {
     }
 
     public void deleteRefreshToken(String token ){
+        System.out.println("hihihi"+token);
         refreshTokenRepository.deleteByToken(token);
         refreshTokenRepository.flush();
     }

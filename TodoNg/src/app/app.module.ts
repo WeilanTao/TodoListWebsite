@@ -15,7 +15,9 @@ import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpIntercepterService } from './service/http/http-intercepter.service';
-import { AppErrorHandler } from './common/app-error-handler';
+import { AppErrorHandler } from './error/app-error-handler';
+import { AdminpageComponent } from './adminpage/adminpage.component';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { AppErrorHandler } from './common/app-error-handler';
     HeaderComponent,
     FooterComponent,
     SignupComponent,
+    AdminpageComponent,
   
   ],
   imports: [//the components in this Module need the following Module dependencies to work
@@ -36,11 +39,12 @@ import { AppErrorHandler } from './common/app-error-handler';
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [
-    {provide: ErrorHandler, useClass:AppErrorHandler} //whenever you are using errorhandle in the project, use AppErrorHandler instead
-    // {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterService, multi:true}s
+    {provide: ErrorHandler, useClass:AppErrorHandler}, //whenever you are using errorhandle in the project, use AppErrorHandler instead
+    {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterService, multi:true}
   ],
   bootstrap: [AppComponent] //when this module loads, theses bootstrap components will be loaded at the same time 
 })

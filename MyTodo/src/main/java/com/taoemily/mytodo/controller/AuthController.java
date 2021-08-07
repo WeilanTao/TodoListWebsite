@@ -67,7 +67,7 @@ public class AuthController {
 
         authService.deleteRefreshToken(refreshTokenRequest);
 
-        return ResponseEntity.ok("logut successfully");
+        return ResponseEntity.ok("{logout successfully}");
     }
 
 }
