@@ -1,5 +1,5 @@
 <table border="1">
-    <caption>user-todo works! {{userid}}</caption>
+    <caption>user-todo works! {{username}}</caption>
 
     <thead>
         <tr>
@@ -17,7 +17,7 @@
             <td> {{todo.name}} </td>
             <td> {{todo.description}}</td>
             <td> {{todo.date|date}} </td>
-            <td> {{todo.done}} </td>
+            <td> {{todo.isDone}} </td>
             <td> <button (click)="deleteTodo(todo.todo_id)" class= "btn btn-warning"> Delete </button></td>
         </tr>
     </tbody>

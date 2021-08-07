@@ -1,10 +1,12 @@
-import { ConflictError } from './../common/409error';
-import { NotFoundError } from './../common/404error';
-import { AppError } from './../common/app-error';
+import { ConflictError } from '../error/409error';
+import { NotFoundError } from '../error/404error';
+import { AppError } from '../error/app-error';
 import { AuthService } from './../service/auth/auth.service';
-import { SignupRequestPayload } from './signup-request.payload';
+import { SignupRequestPayload } from '../databoject/signup-request.payload';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { count } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -59,7 +61,9 @@ export class SignupComponent implements OnInit {
   }
   userExists: boolean = false;
 
-  constructor(private authService:AuthService) {
+  constructor(
+    private router: Router, 
+    private authService:AuthService) {
     this.signupRequestPayload={
       username:'',
       useremail:'',
@@ -83,7 +87,8 @@ export class SignupComponent implements OnInit {
 
     this.authService.signup(this.signupRequestPayload)
       .subscribe(data=>{
-        console.log(data);
+        this.router.navigate(["login"]);
+        // console.log(data);
       },(error: AppError)=>{
         this.signupform.reset();
 

@@ -1,7 +1,8 @@
+import { LoginRequestPayload } from './../databoject/login-request.payload';
+import { AuthService } from './../service/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +42,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router, //maps a URL path to a component
     private routr: ActivatedRoute,
-    private authenticationService:AuthenticationService
+    private authService:AuthService
+    // private authenticationService:AuthenticationService
     ) {
 
   }
@@ -62,21 +64,21 @@ export class LoginComponent implements OnInit {
 
 
 
-  loginHardCoded() {
-    // this.loginform.setErrors({
-    //   invalidLogin:true
-    // });
-    let emailaddress = this.loginform.get('account.email')?.value as string;
-    let passWord = this.loginform.get('account.password')?.value as string;
-    if (this.authenticationService.authenticate(emailaddress, passWord)) {
-      this.router.navigate(['user',emailaddress, 'todos']);
-      this.invalidLogin = false;
-    } else {
-      this.invalidLogin = true;
-      this.loginform.reset();
-      console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
-    }
-  }
+  // loginHardCoded() {
+  //   // this.loginform.setErrors({
+  //   //   invalidLogin:true
+  //   // });
+  //   let emailaddress = this.loginform.get('account.email')?.value as string;
+  //   let passWord = this.loginform.get('account.password')?.value as string;
+  //   if (this.authenticationService.authenticate(emailaddress, passWord)) {
+  //     this.router.navigate(['user',emailaddress, 'todos']);
+  //     this.invalidLogin = false;
+  //   } else {
+  //     this.invalidLogin = true;
+  //     this.loginform.reset();
+  //     console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
+  //   }
+  // }
 
   // login() {
   //   let emailaddress = this.loginform.get('account.email')?.value as string;
@@ -94,18 +96,25 @@ export class LoginComponent implements OnInit {
   login() {
     let emailaddress = this.loginform.get('account.email')?.value as string;
     let passWord = this.loginform.get('account.password')?.value as string;
-    this.authenticationService.authenticate(emailaddress, passWord)
+    console.log(emailaddress, passWord);
+    let loginRequestPayload: LoginRequestPayload={userEmail:emailaddress, passWord:passWord};
+    this.authService.login(loginRequestPayload )
       .subscribe(
         data=>{
-          console.log(data);
-          this.router.navigate(['user',emailaddress, 'todos']);
+          let role = this.authService.getAuthenticatedUserRole();
+          let username = this.authService.getAuthenticatedUserName();
+          if(role==="ADMIN"){
+            this.router.navigate(['adminpage', username,'access'])
+          }else if(role==="USER"){
+            this.router.navigate(['user',username, 'todos']);
+          }
           this.invalidLogin = false;
         },
         error=>{
           console.log(error);
           this.invalidLogin = true;
           this.loginform.reset();
-          console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
+          // console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
         
         }
       )
