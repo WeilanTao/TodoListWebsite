@@ -2,6 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
 
+            <div *ngIf="!authService.isUserLoggedIn()" >
             <div class="navbar-brand">
                 <a href="/" class="nav-link">MyTodo</a>
             </div>
@@ -13,6 +14,8 @@
                         <li><a href="/home" class="nav-link">Contact Emily</a></li>
                     </ul>
                 </ul>
+
+            </div>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li><a *ngIf="!authService.isUserLoggedIn()" href="/login" class="nav-link">login</a></li>

@@ -19,6 +19,9 @@ import { AppErrorHandler } from './error/app-error-handler';
 import { AdminpageComponent } from './adminpage/adminpage.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 
+import {MatCardModule} from '@angular/material/card';
+
+
 
 @NgModule({
   declarations: [//the following components are part of the specific module
@@ -40,7 +43,8 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     AppRoutingModule,
     RouterModule,
     ReactiveFormsModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    MatCardModule
   ],
   providers: [
     {provide: ErrorHandler, useClass:AppErrorHandler}, //whenever you are using errorhandle in the project, use AppErrorHandler instead
