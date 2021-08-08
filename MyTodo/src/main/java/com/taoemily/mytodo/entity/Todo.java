@@ -1,8 +1,10 @@
 package com.taoemily.mytodo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -36,6 +38,7 @@ public class Todo {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+//    @Setter(AccessLevel.NONE)
     private UserEntity userId;
 
     public Todo(String name, Date date, boolean isDone) {

@@ -37,8 +37,25 @@ public class TodoService {
         return todoRepository.findByUserId(userEntity.getId());
     }
 
-    public void deleteTodo(Long id) {
-        todoRepository.deleteTodo(id);
+    public void deleteTodo(Long id, String principleemail){
+
+        try {
+            Integer deletion = todoRepository.deleteTodo(id);
+
+            if(deletion==0)
+                throw new RuntimeException("Invaid deletion. No Such id");
+
+            System.out.println(deletion);
+        }
+        catch(RuntimeException e){
+            throw new RuntimeException("Invaid deletion");
+        }
+//TODO
+//        UserEntity principleuser = userRepository.getUserByEmail(principleemail).orElseThrow(()->new RuntimeException("illegal deletion"));
+//        if(deletedTodo.getUserId()!=principleuser){
+//            throw new RuntimeException("illegal deletion");
+//        }
+
     }
 
     public Todo getTodoById(Long todoId) {
@@ -47,23 +64,38 @@ public class TodoService {
 
     //TODO  throw exception; also check that user can't be changed!
     public void updateTodo(Todo todo) {
+        try{
         Todo toUpdate = todoRepository.getById(todo.getTodo_id());
-        if (toUpdate != null) {
+        if (toUpdate != null && todo.getUserId()==null) {
             toUpdate.setName(todo.getName());
             toUpdate.setDescription(todo.getDescription());
             toUpdate.setDate(todo.getDate());
             toUpdate.setIsDone(todo.getIsDone());
-//            toUpdate.setUsers(todo.getUsers());
             todoRepository.save(toUpdate);
+        }else
+            throw new RuntimeException("Invalid input update data");
+        }
+        catch(RuntimeException e){
+            throw new RuntimeException("failed to update the user");
         }
     }
 
-    /**
-     * The bug:  "org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Provided id of the wrong type for class com.taoemily.mytodo.entity.User. Expected: class java.lang.Long, got class com.fasterxml.jackson.annotation.ObjectIdGenerator$IdKey; nested exception is com.fasterxml.jackson.databind.JsonMappingException: Provided id of the wrong type for class com.taoemily.mytodo.entity.User. Expected: class java.lang.Long, got class com.
-     */
-//    public Todo createTodo(Todo todo) {
-//        return todoRepository.save(todo);
-//    }
+    public Todo createTodo(Todo todo, String principleemail) {
+        UserEntity principleuser = userRepository.getUserByEmail(principleemail).orElseThrow(()->new RuntimeException("illegal deletion"));
+        Todo toSave = new Todo();
+        toSave.setName(todo.getName());
+        toSave.setDate(todo.getDate());
+        toSave.setIsDone(todo.getIsDone());
+        Todo saved= todoRepository.save(toSave);
+
+        List<Todo> todoList=principleuser.getTodoList();
+        todoList.add(saved);
+        principleuser.setTodoList(todoList);
+
+        userRepository.save(principleuser);
+        
+        return todo;
+    }
 
 
 }
