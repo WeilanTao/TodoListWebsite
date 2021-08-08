@@ -74,8 +74,8 @@ public class TodoController {
     public ResponseEntity<?>  createTodo( @RequestBody Todo todo, Principal principal) {
         //Here in the Json Todo object, the property todo_id  can be omitted; since the Todo entity generates the id automatically!!!
         try{
-            Todo createdTodo = todoService.createTodo(todo, principal.getName());
-            return new ResponseEntity<Todo>(createdTodo, HttpStatus.OK);
+            todoService.createTodo(todo, principal.getName());
+            return ResponseEntity.ok("created successfully");
         }catch (RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

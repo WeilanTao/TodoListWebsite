@@ -7,6 +7,7 @@ import com.taoemily.mytodo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -80,21 +81,29 @@ public class TodoService {
         }
     }
 
-    public Todo createTodo(Todo todo, String principleemail) {
-        UserEntity principleuser = userRepository.getUserByEmail(principleemail).orElseThrow(()->new RuntimeException("illegal deletion"));
-        Todo toSave = new Todo();
-        toSave.setName(todo.getName());
-        toSave.setDate(todo.getDate());
-        toSave.setIsDone(todo.getIsDone());
-        Todo saved= todoRepository.save(toSave);
+    public void createTodo(Todo todo, String principleemail) {
+        try {
+            UserEntity principleuser = userRepository.getUserByEmail(principleemail).orElseThrow(() -> new RuntimeException("illegal deletion"));
+            Todo toSave = new Todo();
+            if(!StringUtils.hasText(todo.getName()) || todo.getDate()==null || todo.getIsDone()==null || todo.getUserId()!=null){
+                throw new RuntimeException("bad request info");
+            }
+            toSave.setName(todo.getName());
+            toSave.setDate(todo.getDate());
+            toSave.setDescription(todo.getDescription());
+            toSave.setIsDone(todo.getIsDone());
+            Todo saved = todoRepository.save(toSave);
 
-        List<Todo> todoList=principleuser.getTodoList();
-        todoList.add(saved);
-        principleuser.setTodoList(todoList);
+            List<Todo> todoList = principleuser.getTodoList();
+            todoList.add(saved);
+            principleuser.setTodoList(todoList);
 
-        userRepository.save(principleuser);
-        
-        return todo;
+            userRepository.save(principleuser);
+
+        }
+        catch(RuntimeException e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
 
