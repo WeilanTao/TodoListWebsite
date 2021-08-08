@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
     @Query("select todo from Todo todo where todo.userId.id=?1")
-    List<Todo> findByUserId(Long id);
+    Optional<List<Todo>> findByUserId(Long id);
 
     @Transactional
     @Modifying

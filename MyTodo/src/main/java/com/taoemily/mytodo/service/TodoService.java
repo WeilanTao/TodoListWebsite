@@ -4,6 +4,7 @@ import com.taoemily.mytodo.entity.Todo;
 import com.taoemily.mytodo.entity.UserEntity;
 import com.taoemily.mytodo.repository.TodoRepository;
 import com.taoemily.mytodo.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
@@ -24,31 +26,24 @@ public class TodoService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void setTodoRepository(TodoRepository todoRepository) {
-        this.todoRepository = todoRepository;
-    }
-
-//    public Long saveTodo(Todo todo){
-//        return todoRepository.save(todo);
-//    }
 
     public List<Todo> getAllTodosForAUser(String email) {
-        UserEntity userEntity= userRepository.getUserByEmail(email).orElseThrow(
+        UserEntity userEntity = userRepository.getUserByEmail(email).orElseThrow(
                 () -> new UsernameNotFoundException("No user found with email : " + email));
-        return todoRepository.findByUserId(userEntity.getId());
+        return todoRepository.findByUserId(userEntity.getId())
+                .orElseThrow(() -> new RuntimeException("No user found"));
     }
 
-    public void deleteTodo(Long id, String principleemail){
+    public void deleteTodo(Long id, String principleemail) {
 
         try {
             Integer deletion = todoRepository.deleteTodo(id);
 
-            if(deletion==0)
+            if (deletion == 0)
                 throw new RuntimeException("Invaid deletion. No Such id");
 
             System.out.println(deletion);
-        }
-        catch(RuntimeException e){
+        } catch (RuntimeException e) {
             throw new RuntimeException("Invaid deletion");
         }
 //TODO
@@ -63,20 +58,18 @@ public class TodoService {
         return todoRepository.getById(todoId);
     }
 
-    //TODO  throw exception; also check that user can't be changed!
     public void updateTodo(Todo todo) {
-        try{
-        Todo toUpdate = todoRepository.getById(todo.getTodo_id());
-        if (toUpdate != null && todo.getUserId()==null) {
-            toUpdate.setName(todo.getName());
-            toUpdate.setDescription(todo.getDescription());
-            toUpdate.setDate(todo.getDate());
-            toUpdate.setIsDone(todo.getIsDone());
-            todoRepository.save(toUpdate);
-        }else
-            throw new RuntimeException("Invalid input update data");
-        }
-        catch(RuntimeException e){
+        try {
+            Todo toUpdate = todoRepository.getById(todo.getTodo_id());
+            if (toUpdate != null && todo.getUserId() == null) {
+                toUpdate.setName(todo.getName());
+                toUpdate.setDescription(todo.getDescription());
+                toUpdate.setDate(todo.getDate());
+                toUpdate.setIsDone(todo.getIsDone());
+                todoRepository.save(toUpdate);
+            } else
+                throw new RuntimeException("Invalid input update data");
+        } catch (RuntimeException e) {
             throw new RuntimeException("failed to update the user");
         }
     }
@@ -85,7 +78,7 @@ public class TodoService {
         try {
             UserEntity principleuser = userRepository.getUserByEmail(principleemail).orElseThrow(() -> new RuntimeException("illegal deletion"));
             Todo toSave = new Todo();
-            if(!StringUtils.hasText(todo.getName()) || todo.getDate()==null || todo.getIsDone()==null || todo.getUserId()!=null){
+            if (!StringUtils.hasText(todo.getName()) || todo.getDate() == null || todo.getIsDone() == null || todo.getUserId() != null) {
                 throw new RuntimeException("bad request info");
             }
             toSave.setName(todo.getName());
@@ -100,8 +93,7 @@ public class TodoService {
 
             userRepository.save(principleuser);
 
-        }
-        catch(RuntimeException e){
+        } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
     }

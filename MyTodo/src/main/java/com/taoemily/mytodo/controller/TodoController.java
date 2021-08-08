@@ -4,12 +4,10 @@ import com.taoemily.mytodo.entity.Todo;
 import com.taoemily.mytodo.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -26,9 +24,13 @@ public class TodoController {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, path = "/todos")
-    public List<Todo> getAllTodo(Principal principal) {
-        String email = principal.getName();
-        return todoService.getAllTodosForAUser(email);
+    public ResponseEntity<?> getAllTodo(Principal principal) {
+        try {
+            String email = principal.getName();
+            return ResponseEntity.ok(todoService.getAllTodosForAUser(email));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     /**
@@ -37,8 +39,13 @@ public class TodoController {
      * @param todoId
      */
     @DeleteMapping("/deletetodos")
-    public void deteleTodo(@RequestParam(required = true) Long todoId, Principal principal) {
-        todoService.deleteTodo(todoId, principal.getName());
+    public ResponseEntity<?> deteleTodo(@RequestParam(required = true) Long todoId, Principal principal) {
+        try {
+            todoService.deleteTodo(todoId, principal.getName());
+            return ResponseEntity.ok("deleted successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     /**
@@ -64,19 +71,19 @@ public class TodoController {
             //TODO todouser has to be the same as principle
             todoService.updateTodo(todo);
             return ResponseEntity.ok("updated successfully");
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
 
     @PostMapping(path = "/createtodos")
-    public ResponseEntity<?>  createTodo( @RequestBody Todo todo, Principal principal) {
+    public ResponseEntity<?> createTodo(@RequestBody Todo todo, Principal principal) {
         //Here in the Json Todo object, the property todo_id  can be omitted; since the Todo entity generates the id automatically!!!
-        try{
+        try {
             todoService.createTodo(todo, principal.getName());
             return ResponseEntity.ok("created successfully");
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
