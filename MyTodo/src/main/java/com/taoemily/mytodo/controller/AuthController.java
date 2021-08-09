@@ -38,7 +38,6 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> signupUser(@Valid @RequestBody SignupRequest signupRequest) {
-//        System.out.println(signupRequest.toString());
         try {
             authService.saveNewUser(signupRequest);
             return ResponseEntity.status(200).body("signed up successfully");
@@ -46,8 +45,6 @@ public class AuthController {
             return ResponseEntity.status(409).body("User already exists");
         }
 
-//TODO 数据库里报错 409 duplicate user
-//        c
     }
 
     @PostMapping("/refreshtoken")

@@ -43,14 +43,11 @@ export class LoginComponent implements OnInit {
     private router: Router, //maps a URL path to a component
     private routr: ActivatedRoute,
     private authService:AuthService
-    // private authenticationService:AuthenticationService
     ) {
 
   }
 
   ngOnInit(): void {
-
-
   }
 
   inputEmail(userEmail: HTMLInputElement) {
@@ -62,36 +59,6 @@ export class LoginComponent implements OnInit {
     this.loginform.get('account.password')?.setValue(userPassword.value);
   }
 
-
-
-  // loginHardCoded() {
-  //   // this.loginform.setErrors({
-  //   //   invalidLogin:true
-  //   // });
-  //   let emailaddress = this.loginform.get('account.email')?.value as string;
-  //   let passWord = this.loginform.get('account.password')?.value as string;
-  //   if (this.authenticationService.authenticate(emailaddress, passWord)) {
-  //     this.router.navigate(['user',emailaddress, 'todos']);
-  //     this.invalidLogin = false;
-  //   } else {
-  //     this.invalidLogin = true;
-  //     this.loginform.reset();
-  //     console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
-  //   }
-  // }
-
-  // login() {
-  //   let emailaddress = this.loginform.get('account.email')?.value as string;
-  //   let passWord = this.loginform.get('account.password')?.value as string;
-  //   if (this.authenticationService.authenticate(emailaddress, passWord)) {
-  //     this.router.navigate(['user',emailaddress, 'todos']);
-  //     this.invalidLogin = false;
-  //   } else {
-  //     this.invalidLogin = true;
-  //     this.loginform.reset();
-  //     console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
-  //   }
-  // }
 
   login() {
     let emailaddress = this.loginform.get('account.email')?.value as string;
@@ -113,9 +80,7 @@ export class LoginComponent implements OnInit {
         error=>{
           console.log(error);
           this.invalidLogin = true;
-          this.loginform.reset();
-          // console.log("invalidLogin", this.invalidLogin, "email", this.loginform.get('account.email')?.touched);
-        
+          this.loginform.reset();        
         }
       )
 

@@ -1,6 +1,5 @@
 import { LoginResponsePayload } from './../../databoject/login-response.payload';
 import { LoginRequestPayload } from './../../databoject/login-request.payload';
-import { UserDto } from 'src/app/databoject/user';
 import { ConflictError } from '../../error/409error';
 import { AppError } from '../../error/app-error';
 import { Observable } from 'rxjs';
@@ -12,7 +11,6 @@ import { throwError } from 'rxjs';
 import { UnauthorizedError } from 'src/app/error/401';
 import { LocalStorageService } from 'ngx-webstorage';
 import { RefreshTokenPayload } from 'src/app/databoject/refreshtoken.payload';
-import { ResponseType } from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
@@ -78,9 +76,7 @@ export class AuthService {
     this.localStorage.clear();
 
     return this.httpClient.post("http://localhost:8080/auth/logout", refreshTokenPayload, { responseType: 'text' })
-    .subscribe(data=>{});
-
-
+      .subscribe(data => { });
 
   }
 
@@ -112,7 +108,6 @@ export class AuthService {
     let name = this.getAuthenticatedUserName();
     let refreshToken = this.getRefreshToken();
     let accessToken = this.getAuthenticatedToken();
-    //TODO: Have to tell when the refresh
 
     return !(name === null || refreshToken === null || accessToken === null);
   }
