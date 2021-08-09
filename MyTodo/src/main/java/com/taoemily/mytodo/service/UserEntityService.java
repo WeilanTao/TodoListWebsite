@@ -68,28 +68,28 @@ public class UserEntityService {
         }
     }
 
-//    public void deleteUser(String useremail) {
-//        try {
-//            UserEntity userEntity = userRepository.getUserByEmail(useremail)
-//                    .orElseThrow(() -> new RuntimeException("No such user."));
-//
-//            List<Todo> todoList = userEntity.getTodoList();
-//
-//            for(Todo t: todoList){
-//                t.setUserId(null);
-//            }
-//
-//
-//            userRepository.delete(userEntity);
-//
-//            Integer res = userRepository.deleteByEmail(useremail);
-//            if (res == 1) {
-//                throw new RuntimeException("user deletion failure");
-//            }
-//
-//        } catch (RuntimeException e) {
-//            throw new RuntimeException(e.getMessage());
-//        }
-//    }
+    public void deleteUser(String useremail) {
+        try {
+            UserEntity userEntity = userRepository.getUserByEmail(useremail)
+                    .orElseThrow(() -> new RuntimeException("No such user."));
+
+            List<Todo> todoList = userEntity.getTodoList();
+
+            for(Todo t: todoList){
+                t.setUserId(null);
+            }
+
+
+            userRepository.delete(userEntity);
+
+            Integer res = userRepository.deleteByEmail(useremail);
+            if (res == 1) {
+                throw new RuntimeException("user deletion failure");
+            }
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
 }

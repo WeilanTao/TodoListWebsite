@@ -52,15 +52,15 @@ public class AdminController {
         }
     }
 
-//    @DeleteMapping("/deleteuser")
-//    public ResponseEntity<?> deleteuser(@RequestParam String useremail){
-//        try{
-//            userEntityService.deleteUser(useremail);
-//            return ResponseEntity.ok().body("delete user succefully");
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
+    @DeleteMapping("/deleteuser")
+    public ResponseEntity<?> deleteuser(@RequestParam String useremail){
+        try{
+            userEntityService.deleteUser(useremail);
+            return ResponseEntity.ok().body("delete user succefully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 
 }
