@@ -18,9 +18,10 @@ import { HttpIntercepterService } from './service/http/http-intercepter.service'
 import { AppErrorHandler } from './error/app-error-handler';
 import { AdminpageComponent } from './adminpage/adminpage.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
-
+import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
-
+import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -44,7 +45,11 @@ import {MatCardModule} from '@angular/material/card';
     RouterModule,
     ReactiveFormsModule,
     NgxWebstorageModule.forRoot(),
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule
+
   ],
   providers: [
     {provide: ErrorHandler, useClass:AppErrorHandler}, //whenever you are using errorhandle in the project, use AppErrorHandler instead

@@ -3,18 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 
-export class Todo{
-  constructor(
-    public todo_id:number,
-    public todoName:string,
-    public description:string, 
-    public isDone:boolean,
-    public date:Date,
 
-  ){
-  }
-
-}
 
 
 
@@ -25,45 +14,59 @@ export class Todo{
 })
 export class UserTodoComponent implements OnInit {
 
-  todos:any;
-  isDeleted= false;
-  
+  notEmpty: any;
+  todos: any;
+  isDeleted = false;
 
-  username:string='';
+  displayedColumns = ['name', 'description', 'date', 'isDone', 'option'];
+
+  username: string = '';
   constructor(
-    private route:Router,
-    private activatedRoute:ActivatedRoute,
-    private todoService:TodoService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute,
+    private todoService: TodoService,
   ) { }
 
   ngOnInit(): void {
 
-    this.username=this.activatedRoute.snapshot.params['username'];
+    this.username = this.activatedRoute.snapshot.params['username'];
 
     this.loadTodoList();
-    
+
   }
 
-  loadTodoList(){
+  loadTodoList() {
     this.todoService.getAllTodoForUser()
-      .subscribe(response=>{
-        console.log(response);
-        this.todos=response;
+      .subscribe(response => {
+
+        this.notEmpty = response.toString() === "" ? true : false;
+
+        this.todos = response;
+
       })
-    
+
   }
 
 
   //TODO: Autohide alert box~animation
-  deleteTodo(id:number){
+  deleteTodo(id: number) {
     this.todoService.deleteById(id)
       .subscribe(
-        response=>{
-          this.isDeleted=true;
+        response => {
+          this.isDeleted = true;
           this.loadTodoList();
         }
       );
   }
 
+  doneTodo(id:number){
+    this.todoService.doneById(id)
+    .subscribe(
+      response => {
+        this.isDeleted = true;
+        this.loadTodoList();
+      }
+    );
+  }
 
 }

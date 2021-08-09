@@ -88,4 +88,17 @@ public class TodoController {
         }
     }
 
+    @PutMapping("/donetodo")
+    public ResponseEntity<?> doneTodo(@RequestParam(required = true) Long todoId, Principal principal) {
+        try {
+
+            todoService.doneTodo(todoId);
+            return ResponseEntity.ok("done todo");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+
+
 }

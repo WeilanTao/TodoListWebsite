@@ -34,4 +34,19 @@ export class TodoService {
     return this.http.request('delete', "http://localhost:8080/deletetodos", options);
   
   }
+
+
+  doneById(todoid:number){
+    let param= new HttpParams();
+    param= param.append("todoId", todoid);
+
+    const options:Object = {
+      params: param,
+      responseType:'text' as 'tex',
+    };
+
+    return this.http.request('put', "http://localhost:8080/donetodo", options);
+  
+  }
+
 }
