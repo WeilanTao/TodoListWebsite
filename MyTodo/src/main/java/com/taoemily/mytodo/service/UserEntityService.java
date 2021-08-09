@@ -1,6 +1,8 @@
 package com.taoemily.mytodo.service;
 
+import com.taoemily.mytodo.entity.Todo;
 import com.taoemily.mytodo.entity.UserEntity;
+import com.taoemily.mytodo.repository.TodoRepository;
 import com.taoemily.mytodo.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +15,81 @@ import java.util.List;
 public class UserEntityService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TodoRepository todoRepository;
 
     public UserEntity getUserByEmail(String email) {
-        UserEntity userEntity= userRepository.getUserByEmail(email)
-                .orElseThrow(()->new RuntimeException("No user found Invalid User email account"));
+        UserEntity userEntity = userRepository.getUserByEmail(email)
+                .orElseThrow(() -> new RuntimeException("No user found Invalid User email account"));
 
         return userEntity;
     }
 
-    public List<UserEntity> getAllUser(){
+    public List<UserEntity> getAllUser() {
 
-        List<UserEntity> list= userRepository.findAll();
+        List<UserEntity> list = userRepository.findAll();
 
-        for(UserEntity userEntity:list){
+        for (UserEntity userEntity : list) {
             System.out.println(userEntity.toString());
         }
 
         return list;
     }
+
+    public void setAdmin(String useremail) {
+        try {
+            UserEntity userEntity = userRepository.getUserByEmail(useremail)
+                    .orElseThrow(() -> new RuntimeException("No such user."));
+
+            if(!userEntity.getIsAdmin()) {
+                userEntity.setIsAdmin(true);
+                userRepository.saveAndFlush(userEntity);
+            }else{
+                throw new RuntimeException("can't set this user since this user has already been an admin");
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public void removeAdmin(String useremail) {
+        try {
+            UserEntity userEntity = userRepository.getUserByEmail(useremail)
+                    .orElseThrow(() -> new RuntimeException("No such user."));
+
+            if (userEntity.getIsAdmin()) {
+                userEntity.setIsAdmin(false);
+                userRepository.saveAndFlush(userEntity);
+            }else{
+                throw new RuntimeException("can't remove this user since this user is not an admin");
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+//    public void deleteUser(String useremail) {
+//        try {
+//            UserEntity userEntity = userRepository.getUserByEmail(useremail)
+//                    .orElseThrow(() -> new RuntimeException("No such user."));
+//
+//            List<Todo> todoList = userEntity.getTodoList();
+//
+//            for(Todo t: todoList){
+//                t.setUserId(null);
+//            }
+//
+//
+//            userRepository.delete(userEntity);
+//
+//            Integer res = userRepository.deleteByEmail(useremail);
+//            if (res == 1) {
+//                throw new RuntimeException("user deletion failure");
+//            }
+//
+//        } catch (RuntimeException e) {
+//            throw new RuntimeException(e.getMessage());
+//        }
+//    }
 
 }
