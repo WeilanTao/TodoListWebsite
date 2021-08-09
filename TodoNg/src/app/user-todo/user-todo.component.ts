@@ -56,13 +56,13 @@ export class UserTodoComponent implements OnInit {
 
   //TODO: Autohide alert box~animation
   deleteTodo(id:number){
-    // this.todoService.deleteById(id)
-    //   .subscribe(
-    //     response=>{
-    //       this.isDeleted=true;
-    //       this.loadTodoList();
-    //     }
-    //   );
+    this.todoService.deleteById(id)
+      .subscribe(
+        response=>{
+          this.isDeleted=true;
+          this.loadTodoList();
+        }
+      );
   }
 
 

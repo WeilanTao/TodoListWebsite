@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,19 @@ export class TodoService {
   getAllTodoForUser(){
     return this.http.get("http://localhost:8080/todos");
 
+  }
+  
+
+  deleteById(todoid:number){
+    let param= new HttpParams();
+    param= param.append("todoId", todoid);
+
+    const options:Object = {
+      params: param,
+      responseType:'text' as 'tex',
+    };
+
+    return this.http.request('delete', "http://localhost:8080/deletetodos", options);
+  
   }
 }

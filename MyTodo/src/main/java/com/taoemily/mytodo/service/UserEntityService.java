@@ -75,10 +75,6 @@ public class UserEntityService {
 
             userRepository.delete(userEntity);
 
-            Integer res = userRepository.deleteByEmail(useremail);
-            if (res == 1) {
-                throw new RuntimeException("user deletion failure");
-            }
 
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());

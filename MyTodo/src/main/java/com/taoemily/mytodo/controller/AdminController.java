@@ -52,6 +52,7 @@ public class AdminController {
         }
     }
 
+    //TODO this is broken !!!
     @DeleteMapping("/deleteuser")
     public ResponseEntity<?> deleteuser(@RequestParam String useremail){
         try{
