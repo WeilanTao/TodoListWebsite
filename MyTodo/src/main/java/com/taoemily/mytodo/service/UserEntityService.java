@@ -73,13 +73,6 @@ public class UserEntityService {
             UserEntity userEntity = userRepository.getUserByEmail(useremail)
                     .orElseThrow(() -> new RuntimeException("No such user."));
 
-            List<Todo> todoList = userEntity.getTodoList();
-
-            for(Todo t: todoList){
-                t.setUserId(null);
-            }
-
-
             userRepository.delete(userEntity);
 
             Integer res = userRepository.deleteByEmail(useremail);
