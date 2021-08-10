@@ -8,7 +8,7 @@
                 formControlName="username" #userName (input)="inputUsername(userName)">
             <div *ngIf="username?.touched && username?.invalid" class="alert alert-danger">
                 <div *ngIf="username?.errors?.required">Email can't be empty</div>
-                <div *ngIf="username?.errors?.maxLength">User name too long</div>
+                <!-- <div *ngIf="username?.errors?.maxLength">User name too long</div> -->
             </div>
         </div>
 

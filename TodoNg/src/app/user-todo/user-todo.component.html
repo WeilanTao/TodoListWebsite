@@ -1,24 +1,59 @@
-<table border="1">
-    <caption>user-todo works! {{username}}</caption>
+<button mat-icon-button (click)="createTodo()">
+    <mat-icon>more_time</mat-icon>
+</button>
 
-    <thead>
-        <tr>
-            <th>todoId</th>
-            <th>name</th>
-            <th>descirption</th>
-            <th>target date</th>
-            <th>is completed</th>
-        </tr>
-    </thead>
-    <div *ngIf="isDeleted">Todo has been deleted</div>
-    <tbody>
-        <tr *ngFor="let todo of todos">
-            <td> {{todo.todo_id}} </td>
-            <td> {{todo.name}} </td>
-            <td> {{todo.description}}</td>
-            <td> {{todo.date|date}} </td>
-            <td> {{todo.isDone}} </td>
-            <td> <button (click)="deleteTodo(todo.todo_id)" class= "btn btn-warning"> Delete </button></td>
-        </tr>
-    </tbody>
-</table>
+<div class="container mat-elevation-z8">
+ 
+    <table mat-table [dataSource]="todos">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Todo </th>
+            <td mat-cell *matCellDef="let todo"> {{todo.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let todo"> {{todo.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Target Date </th>
+            <td mat-cell *matCellDef="let todo"> {{todo.date|date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isDone">
+            <th mat-header-cell *matHeaderCellDef> Status</th>
+            <td mat-cell *matCellDef="let todo"> {{todo.isDone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="option">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let todo">
+
+                <button mat-icon-button (click)="editTodo(todo)">
+                    <mat-icon>open_in_full</mat-icon>
+                </button>
+                <button mat-icon-button (click)="doneTodo(todo.todo_id)">
+                    <mat-icon>check</mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteTodo(todo.todo_id)">
+                    <mat-icon>delete_outline</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="NoTodo" >
+            <mat-footer-cell *matFooterCellDef >No Todo Event</mat-footer-cell>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+       
+     
+        <tr mat-footer-row *matFooterRowDef="['NoTodo']" [ngClass]="{'hide':!notEmpty}"></tr>
+
+
+      
+    
+    </table>
+
+</div>

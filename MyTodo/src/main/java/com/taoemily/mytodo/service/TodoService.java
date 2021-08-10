@@ -65,7 +65,6 @@ public class TodoService {
                 toUpdate.setName(todo.getName());
                 toUpdate.setDescription(todo.getDescription());
                 toUpdate.setDate(todo.getDate());
-                toUpdate.setIsDone(todo.getIsDone());
                 todoRepository.save(toUpdate);
             } else
                 throw new RuntimeException("Invalid input update data");
@@ -73,6 +72,21 @@ public class TodoService {
             throw new RuntimeException("failed to update the user");
         }
     }
+
+    public void doneTodo(Long id){
+        try {
+            Todo toUpdate = todoRepository.getById(id);
+            if (toUpdate != null ) {
+
+                toUpdate.setIsDone( !toUpdate.getIsDone()) ;
+                todoRepository.save(toUpdate);
+            } else
+                throw new RuntimeException("Invalid input update data");
+        } catch (RuntimeException e) {
+            throw new RuntimeException("failed to update the user");
+        }
+    }
+
 
     public void createTodo(Todo todo, String principleemail) {
         try {
@@ -85,6 +99,9 @@ public class TodoService {
             toSave.setDate(todo.getDate());
             toSave.setDescription(todo.getDescription());
             toSave.setIsDone(todo.getIsDone());
+
+            System.out.println("++++++++++++++++++++++++++++++++++++++"+toSave.toString());
+
             Todo saved = todoRepository.save(toSave);
 
             List<Todo> todoList = principleuser.getTodoList();

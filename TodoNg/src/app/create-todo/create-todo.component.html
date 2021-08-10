@@ -1,0 +1,44 @@
+<div class="container">
+
+    <form [formGroup]="createTodoForm" >
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Todo Name</mat-label>
+            <input matInput placeholder="enter todo name..." formControlName="todoname" required>
+            <mat-error *ngIf="todoname?.errors?.required">Todo name can't be empty</mat-error>
+            <mat-error *ngIf="todoname?.errors?.maxlength">Todo name no more than 10 chars</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Todo Description</mat-label>
+            <textarea matInput placeholder="enter todo description..." formControlName="description"></textarea>
+            <mat-error *ngIf="description?.errors?.maxlength">Todo name no more than 30 chars</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" >
+            <mat-label>Target Date</mat-label>
+            <input matInput formControlName="tododate"  [min]="minDate" [max]="maxDate" [matDatepicker]="dp">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker touchUi  #dp></mat-datepicker>
+            <mat-error *ngIf="tododate?.invalid">Invalid input. Please select form the build in calander </mat-error>
+        </mat-form-field>
+
+       <div class="slide" >
+            <mat-slide-toggle 
+            formControlName="isDone"   
+            
+            [color]="color"
+            [checked]="checked"
+            [disabled]="disabled"></mat-slide-toggle>
+            <mat-label>Done!</mat-label>
+
+        </div>
+
+        <p>FromGroupValues: {{ createTodoForm.value | json }}</p>
+
+        <mat-dialog-actions >
+            <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
+            <button  mat-button [disabled]="!(todoname?.touched && todoname?.valid && description?.valid && tododate?.touched&& tododate?.valid &&createTodoForm.valid)" mat-dialog-close (click)="submit()">Submit</button>
+          </mat-dialog-actions>
+    </form>
+</div>

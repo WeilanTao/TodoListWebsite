@@ -1,0 +1,21 @@
+.container {
+    height: 50%;
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 10%;
+    padding-right: 10%;
+    
+    border: 1px black solid;
+    
+    overflow: auto;
+  }
+  
+  table {
+    border: 1px red solid;
+    width: 100%;
+  }
+
+  .mat-icon{
+    font-size: 10px;
+  }
