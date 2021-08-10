@@ -79,6 +79,8 @@ public class TodoController {
 
     @PostMapping(path = "/createtodos")
     public ResponseEntity<?> createTodo(@RequestBody Todo todo, Principal principal) {
+        System.out.println("========================================"+todo.toString());
+        System.out.println(principal.getName());
         //Here in the Json Todo object, the property todo_id  can be omitted; since the Todo entity generates the id automatically!!!
         try {
             todoService.createTodo(todo, principal.getName());

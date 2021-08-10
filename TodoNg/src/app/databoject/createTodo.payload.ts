@@ -1,7 +1,6 @@
-export class Todo{
+export class CreateTodoPayload{
     constructor(
-      public todo_id:number,
-      public todoName:string,
+      public name:string,
       public description:string, 
       public isDone:boolean,
       public date:Date,
@@ -9,4 +8,4 @@ export class Todo{
     ){
     }
   
-  }
+}

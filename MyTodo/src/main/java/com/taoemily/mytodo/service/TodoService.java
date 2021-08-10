@@ -65,7 +65,6 @@ public class TodoService {
                 toUpdate.setName(todo.getName());
                 toUpdate.setDescription(todo.getDescription());
                 toUpdate.setDate(todo.getDate());
-//                toUpdate.setIsDone(todo.getIsDone());
                 todoRepository.save(toUpdate);
             } else
                 throw new RuntimeException("Invalid input update data");
@@ -100,6 +99,9 @@ public class TodoService {
             toSave.setDate(todo.getDate());
             toSave.setDescription(todo.getDescription());
             toSave.setIsDone(todo.getIsDone());
+
+            System.out.println("++++++++++++++++++++++++++++++++++++++"+toSave.toString());
+
             Todo saved = todoRepository.save(toSave);
 
             List<Todo> todoList = principleuser.getTodoList();

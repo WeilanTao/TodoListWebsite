@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-
-input.ng-invalid.ng-touched{
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+/* input.ng-invalid.ng-touched{
     border: 1px solid red;
+} */
+
+mat-error{
+    color: rgb(161, 19, 19);
+    font-size: 8px;
 }

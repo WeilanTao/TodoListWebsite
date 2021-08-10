@@ -1,4 +1,9 @@
+<button mat-icon-button (click)="createTodo()">
+    <mat-icon>more_time</mat-icon>
+</button>
+
 <div class="container mat-elevation-z8">
+ 
     <table mat-table [dataSource]="todos">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Todo </th>
@@ -24,8 +29,8 @@
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let todo">
 
-                <button mat-icon-button>
-                    <mat-icon color="red">open_in_full</mat-icon>
+                <button mat-icon-button (click)="editTodo(todo)">
+                    <mat-icon>open_in_full</mat-icon>
                 </button>
                 <button mat-icon-button (click)="doneTodo(todo.todo_id)">
                     <mat-icon>check</mat-icon>
@@ -47,6 +52,8 @@
         <tr mat-footer-row *matFooterRowDef="['NoTodo']" [ngClass]="{'hide':!notEmpty}"></tr>
 
 
+      
     
     </table>
+
 </div>

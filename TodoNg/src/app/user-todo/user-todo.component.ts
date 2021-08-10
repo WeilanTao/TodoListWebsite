@@ -1,10 +1,10 @@
+import { UpdateTodoPayload } from './../databoject/update-todo.payload';
+import { UpdateTodoComponent } from './../update-todo/update-todo.component';
 import { TodoService } from './../service/todo.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
-
-
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CreateTodoComponent } from '../create-todo/create-todo.component';
 
 
 @Component({
@@ -25,6 +25,7 @@ export class UserTodoComponent implements OnInit {
     private route: Router,
     private activatedRoute: ActivatedRoute,
     private todoService: TodoService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -59,14 +60,57 @@ export class UserTodoComponent implements OnInit {
       );
   }
 
-  doneTodo(id:number){
+  doneTodo(id: number) {
     this.todoService.doneById(id)
-    .subscribe(
-      response => {
-        this.isDeleted = true;
-        this.loadTodoList();
+      .subscribe(
+        response => {
+          this.isDeleted = true;
+          this.loadTodoList();
+        }
+      );
+  }
+
+
+  editTodo(todo: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+
+    const dialogRef = this.dialog.open(
+      UpdateTodoComponent,
+      // dialogConfig,
+      {
+        data: {
+          todoId: todo.todo_id,
+          todoName: todo.name,
+          description: todo.description,
+          date: todo.date,
+          isDone: todo.isDone
+        }
       }
     );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.loadTodoList();
+    });
+  }
+
+  createTodo() {
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = "600px";
+    dialogConfig.height = "300px";
+    const dialogRef = this.dialog.open(CreateTodoComponent, dialogConfig);
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        console.log('The dialog was ceated');
+        this.loadTodoList();
+    });
+
   }
 
 }
