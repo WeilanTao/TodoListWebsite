@@ -63,7 +63,7 @@ export class TodoService {
     .pipe(catchError((error: Response) => {
       return throwError(new AppError(error.json));
     }));
-;
+
   }
 
 }

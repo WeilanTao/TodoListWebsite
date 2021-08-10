@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { Moment } from 'moment';
 import * as moment from 'moment';
+import { GlobalVariable } from 'src/globalconstant';
 
 
 @Component({
@@ -21,14 +22,21 @@ export class CreateTodoComponent implements OnInit {
   disabled = false;
   minDate: Moment;
   maxDate: Moment;
+  todonameLimit:number;
+  descriptionLimit:number;
 
 
   constructor(
     private todoService: TodoService
   ) {
+
+    this.todonameLimit = GlobalVariable.TODONAME_LIMIT;
+    this.descriptionLimit = GlobalVariable.DESCRIPTION_LIMIT;
+
+
     this.createTodoForm = new FormGroup({
-      'todoname': new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      'description': new FormControl('', [Validators.maxLength(30)]),
+      'todoname': new FormControl('', [Validators.required, Validators.maxLength(this.todonameLimit)]),
+      'description': new FormControl('', [Validators.maxLength(this.descriptionLimit)]),
       'tododate': new FormControl('',[Validators.required]),
       'isDone': new FormControl('')
     })

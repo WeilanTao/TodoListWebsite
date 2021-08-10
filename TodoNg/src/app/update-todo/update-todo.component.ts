@@ -2,7 +2,10 @@ import { UpdateTodoPayload } from './../databoject/update-todo.payload';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ThisReceiver } from '@angular/compiler';
+import { Moment } from 'moment';
+import { TodoService } from '../service/todo.service';
+import * as moment from 'moment';
+import { GlobalVariable } from 'src/globalconstant';
 
 @Component({
   selector: 'app-update-todo',
@@ -10,75 +13,96 @@ import { ThisReceiver } from '@angular/compiler';
   styleUrls: ['./update-todo.component.css']
 })
 export class UpdateTodoComponent implements OnInit {
+  minDate: Moment;
+  maxDate: Moment;
+  updateTodoForm: FormGroup;
+  updateTodoPayload: UpdateTodoPayload;
 
-  updatetodoform = new FormGroup({
-    
-      'todoname': new FormControl('', [
-        Validators.maxLength(20),
-        Validators.required
+  todonameLimit:number;
+  descriptionLimit:number;
 
-      ]),
-      'description': new FormControl('', [
-        Validators.email,
-        Validators.required
-      ]),
-      'tododate': new FormControl('', [
-        Validators.required,
-        // Validators.date
-      ])
-  
-  })
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: UpdateTodoPayload,
+    private todoService: TodoService
+  ) {
 
-  get todoname(){
-    return this.updatetodoform.get('todoname');
-  }
+    console.log(data);
 
-  get description(){
-    return this.updatetodoform.get('description');
-  }
+    this.todonameLimit = GlobalVariable.TODONAME_LIMIT;
+    this.descriptionLimit = GlobalVariable.DESCRIPTION_LIMIT;
 
-  get tododate(){
-    return this.updatetodoform.get('date');
-  }
+    this.updateTodoForm = new FormGroup({
+      'todoname': new FormControl('', [Validators.required, Validators.maxLength(this.todonameLimit)]),
+      'description': new FormControl('', [Validators.maxLength(this.descriptionLimit)]),
+      'tododate': new FormControl('', [Validators.required]),
+    })
 
-  setTodoName(n:string){
-    this.updatetodoform.get('todoname')?.setValue(n);
-  }
+    this.settodoname(data.name);
+    this.setdescription(data.description);
+    this.settododate(data.date);
 
-  setDescription(d:string){
-    this.updatetodoform.get('description')?.setValue(d);
-  }
 
-  setTododate(d:Date){
-    this.updatetodoform.get('date')?.setValue(d);
-  }
+    this.updateTodoPayload = {
+      todo_id: data.todo_id,
+      name: data.name,
+      description: data.description,
+      isDone: data.isDone,
+      date: data.date
+    }
 
-  todo: UpdateTodoPayload = {
-    todoId: -1,
-    todoName: "",
-    description: "",
-    date: new Date(Date.now()),
-    isDone: false
+    const currentYear = moment().year();
+    const currentMonth = moment().month();
+    const currentDay = moment().date();
+    this.minDate = moment([currentYear, currentMonth, currentDay]);
+    this.maxDate = moment([currentYear + 30, 11, 31]);
 
-  };
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: UpdateTodoPayload) {
-    this.todo.todoId= data.todoId;
-    this.todo.todoName=data.todoName;
-    this.todo.description=data.description;
-    this.todo.date=data.date;
-    this.todo.isDone=data.isDone;
-
-    this.setTodoName(data.todoName);
-    this.setDescription(data.todoName);
-    this.setTododate(data.date);
   }
 
   ngOnInit(): void {
   }
 
-  update(){
-    
+  cancel() {
+    this.updateTodoForm.reset();
   }
+
+  submit(){
+    this.updateTodoPayload.name = this.updateTodoForm.get('todoname')?.value as string;
+    this.updateTodoPayload.description = this.updateTodoForm.get('description')?.value as string;
+    this.updateTodoPayload.date = this.updateTodoForm.get('tododate')?.value as Date;
+
+    this.todoService.updateTodo(this.updateTodoPayload)
+      .subscribe(
+        response => {
+          console.log(response);
+        }, error => {
+          this.updateTodoForm.reset();
+        }
+      )
+
+  }
+
+
+  get todoname() {
+    return this.updateTodoForm.get('todoname');
+  }
+  get description() {
+    return this.updateTodoForm.get('description');
+  }
+
+  get tododate() {
+    return this.updateTodoForm.get('tododate');
+  }
+
+  settodoname(name: string) {
+    this.updateTodoForm.get('todoname')?.setValue(name);
+  }
+  setdescription(d: string) {
+    this.updateTodoForm.get('description')?.setValue(d);
+  }
+
+  settododate(d: Date) {
+    return this.updateTodoForm.get('tododate')?.setValue(d);
+  }
+
 
 }

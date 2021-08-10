@@ -6,13 +6,13 @@
             <mat-label>Todo Name</mat-label>
             <input matInput placeholder="enter todo name..." formControlName="todoname" required>
             <mat-error *ngIf="todoname?.errors?.required">Todo name can't be empty</mat-error>
-            <mat-error *ngIf="todoname?.errors?.maxlength">Todo name no more than 10 chars</mat-error>
+            <mat-error *ngIf="todoname?.errors?.maxlength">Todo name no more than {{todonameLimit}} chars</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="legacy">
             <mat-label>Todo Description</mat-label>
             <textarea matInput placeholder="enter todo description..." formControlName="description"></textarea>
-            <mat-error *ngIf="description?.errors?.maxlength">Todo name no more than 30 chars</mat-error>
+            <mat-error *ngIf="description?.errors?.maxlength">Todo name no more than {{descriptionLimit}} chars</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="legacy" >
@@ -34,7 +34,7 @@
 
         </div>
 
-        <p>FromGroupValues: {{ createTodoForm.value | json }}</p>
+        <!-- <p>FromGroupValues: {{ createTodoForm.value | json }}</p> -->
 
         <mat-dialog-actions >
             <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
