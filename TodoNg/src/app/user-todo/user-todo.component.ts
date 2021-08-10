@@ -80,7 +80,7 @@ export class UserTodoComponent implements OnInit {
     const dialogRef = this.dialog.open(
       UpdateTodoComponent,
       {
-        dialogConfig,
+        // dialogConfig
 
         data: {
           todo_id: todo.todo_id,
