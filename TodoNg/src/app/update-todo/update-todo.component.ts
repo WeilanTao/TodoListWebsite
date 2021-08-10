@@ -20,9 +20,9 @@ export class UpdateTodoComponent implements OnInit {
 
   todonameLimit:number;
   descriptionLimit:number;
-
+  // data: UpdateTodoPayload
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: UpdateTodoPayload,
+    @Inject(MAT_DIALOG_DATA) public data:any,
     private todoService: TodoService
   ) {
 
