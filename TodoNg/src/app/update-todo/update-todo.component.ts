@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Moment } from 'moment';
-import { TodoService } from '../service/todo.service';
+import { TodoService } from '../service/todo/todo.service';
 import * as moment from 'moment';
 import { GlobalVariable } from 'src/globalconstant';
 

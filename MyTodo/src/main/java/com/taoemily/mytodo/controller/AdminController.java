@@ -1,15 +1,18 @@
 package com.taoemily.mytodo.controller;
 
 import com.taoemily.mytodo.entity.UserEntity;
+import com.taoemily.mytodo.exception.AdminIdentityConflictException;
+import com.taoemily.mytodo.exception.UserNotExistException;
 import com.taoemily.mytodo.service.UserEntityService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+
+@CrossOrigin("http://localhost:4200/")
 
 @RestController
 @AllArgsConstructor
@@ -33,9 +36,13 @@ public class AdminController {
 
     @PutMapping("/adminapprove")
     public ResponseEntity<?> adminapprove(@RequestParam String useremail){
-        try{
+        try {
             userEntityService.setAdmin(useremail);
             return ResponseEntity.ok().body("Set admin succefully");
+        }catch(AdminIdentityConflictException e) {
+            return ResponseEntity.status(409).body("this person is already an admin");
+        }catch( UserNotExistException e){
+            return ResponseEntity.status(404).body("user doesn't exists");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -44,9 +51,13 @@ public class AdminController {
     public ResponseEntity<?> removeadmin(@RequestParam String useremail, Principal principal){
         try{
             if(useremail.equals(principal.getName()))
-                return ResponseEntity.badRequest().body("can't remove your self");
+                return ResponseEntity.status(409).body("can't remove your self");
             userEntityService.removeAdmin(useremail);
             return ResponseEntity.ok().body("admin removed successfully");
+        }catch(AdminIdentityConflictException e) {
+            return ResponseEntity.status(409).body("can't remove this user since this user is not an admin");
+        }catch( UserNotExistException e){
+            return ResponseEntity.status(404).body("user doesn't exists");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

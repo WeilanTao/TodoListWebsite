@@ -1,6 +1,6 @@
 import { UpdateTodoPayload } from './../databoject/update-todo.payload';
 import { UpdateTodoComponent } from './../update-todo/update-todo.component';
-import { TodoService } from './../service/todo.service';
+import { TodoService } from '../service/todo/todo.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
