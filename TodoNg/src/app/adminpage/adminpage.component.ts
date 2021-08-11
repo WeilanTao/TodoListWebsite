@@ -37,9 +37,11 @@ export class AdminpageComponent implements OnInit {
 
 
   goTodo(){
-
-
     this.router.navigate(['user',this.username, 'todos']);
+  }
+
+  goUsers(){
+    this.router.navigate(['admin',this.username,'allusers']);
   }
 
 

@@ -34,6 +34,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
 import 'moment/locale/ca';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [//the following components are part of the specific module
@@ -48,6 +49,7 @@ import 'moment/locale/ca';
     AdminpageComponent,
     UpdateTodoComponent,
     CreateTodoComponent,
+    UsersComponent,
 
   ],
   imports: [//the components in this Module need the following Module dependencies to work

@@ -1,5 +1,6 @@
+import { UsersComponent } from './users/users.component';
 import { RouteGuardService } from './service/route-guard.service';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'adminpage/:username/access', component: AdminpageComponent}, //TODO: canActivate
+  { path: 'admin/:username/allusers' , component: UsersComponent},
   { path: 'user/:username/todos', component: UserTodoComponent },//, canActivate:[RouteGuardService]
   { path: '**', component: ErrorpageComponent }//this has to be the last one in the list; otherwise it will filter out anything below it
 ];

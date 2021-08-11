@@ -1,3 +1,4 @@
+import { AuthService } from './../service/auth/auth.service';
 import { UpdateTodoPayload } from './../databoject/update-todo.payload';
 import { UpdateTodoComponent } from './../update-todo/update-todo.component';
 import { TodoService } from '../service/todo/todo.service';
@@ -18,6 +19,8 @@ export class UserTodoComponent implements OnInit {
   todos: any;
   isDeleted = false;
 
+  isAdmin:boolean = this.authservice.getAuthenticatedUserRole()==="ADMIN"?true:false;
+
   displayedColumns = ['name', 'description', 'date', 'isDone', 'option'];
 
   username: string = '';
@@ -25,7 +28,8 @@ export class UserTodoComponent implements OnInit {
     private route: Router,
     private activatedRoute: ActivatedRoute,
     private todoService: TodoService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authservice:AuthService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +38,11 @@ export class UserTodoComponent implements OnInit {
 
     this.loadTodoList();
 
+  }
+
+ 
+  goAdminPage(){
+    this.route.navigate(['adminpage', this.username,'access'])
   }
 
   loadTodoList() {

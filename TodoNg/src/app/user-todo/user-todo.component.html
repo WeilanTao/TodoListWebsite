@@ -1,3 +1,6 @@
+<button mat-icon-button [ngClass]="{'hide':!isAdmin}" (click)="goAdminPage()">
+    <mat-icon>arrow_back_ios</mat-icon>
+</button>
 <button mat-icon-button (click)="createTodo()">
     <mat-icon>more_time</mat-icon>
 </button>
