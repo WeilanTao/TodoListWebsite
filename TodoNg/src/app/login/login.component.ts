@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router, //maps a URL path to a component
-    private routr: ActivatedRoute,
+    private activaterouter: ActivatedRoute,
     private authService:AuthService
     ) {
 
@@ -63,15 +63,19 @@ export class LoginComponent implements OnInit {
   login() {
     let emailaddress = this.loginform.get('account.email')?.value as string;
     let passWord = this.loginform.get('account.password')?.value as string;
-    console.log(emailaddress, passWord);
     let loginRequestPayload: LoginRequestPayload={userEmail:emailaddress, passWord:passWord};
     this.authService.login(loginRequestPayload )
       .subscribe(
         data=>{
           let role = this.authService.getAuthenticatedUserRole();
           let username = this.authService.getAuthenticatedUserName();
-          if(role==="ADMIN"){
-            this.router.navigate(['admin','access'])
+          let returnUrl =  this.activaterouter.snapshot.queryParamMap.get('returnUrl'); 
+
+          if(returnUrl!==null){
+            this.router.navigate([returnUrl]);
+          }
+          else if(role==="ADMIN"){
+            this.router.navigate(['admin','access']);
           }else if(role==="USER"){
             this.router.navigate(['user','todos']);
           }

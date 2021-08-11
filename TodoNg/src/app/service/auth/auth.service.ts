@@ -11,6 +11,7 @@ import { throwError } from 'rxjs';
 import { UnauthorizedError } from 'src/app/error/401';
 import { LocalStorageService } from 'ngx-webstorage';
 import { RefreshTokenPayload } from 'src/app/databoject/refreshtoken.payload';
+import { ForbiddenError } from 'src/app/error/403Error';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,8 @@ export class AuthService {
       .pipe(catchError((error: Response) => {
         if (error.status === 401) {
           return throwError(new UnauthorizedError());
+        }else if(error.status === 403){
+          return throwError(new ForbiddenError());
         }
         return throwError(new AppError(error.json));
       }));

@@ -18,7 +18,7 @@ export class RouteGuardService implements CanActivate {
     if (this.authService.isUserLoggedIn())
       return true;
 
-      //TODO: add  a tost thatindicates authentication failure 
+    
     this.router.navigate(["/login"], {queryParams:{returnUrl:state.url}});
     return false;
   }
