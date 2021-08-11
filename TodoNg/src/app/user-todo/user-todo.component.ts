@@ -1,6 +1,7 @@
+import { AuthService } from './../service/auth/auth.service';
 import { UpdateTodoPayload } from './../databoject/update-todo.payload';
 import { UpdateTodoComponent } from './../update-todo/update-todo.component';
-import { TodoService } from './../service/todo.service';
+import { TodoService } from '../service/todo/todo.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -18,6 +19,8 @@ export class UserTodoComponent implements OnInit {
   todos: any;
   isDeleted = false;
 
+  isAdmin:boolean = this.authservice.getAuthenticatedUserRole()==="ADMIN"?true:false;
+
   displayedColumns = ['name', 'description', 'date', 'isDone', 'option'];
 
   username: string = '';
@@ -25,7 +28,8 @@ export class UserTodoComponent implements OnInit {
     private route: Router,
     private activatedRoute: ActivatedRoute,
     private todoService: TodoService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authservice:AuthService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +38,11 @@ export class UserTodoComponent implements OnInit {
 
     this.loadTodoList();
 
+  }
+
+ 
+  goAdminPage(){
+    this.route.navigate(['adminpage', this.username,'access'])
   }
 
   loadTodoList() {
@@ -72,18 +81,16 @@ export class UserTodoComponent implements OnInit {
 
 
   editTodo(todo: any) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "60%";
-
     const dialogRef = this.dialog.open(
       UpdateTodoComponent,
-      // dialogConfig,
       {
+        disableClose:true,
+        autoFocus : true,
+        width : "600px",
+        height: "300px",
         data: {
-          todoId: todo.todo_id,
-          todoName: todo.name,
+          todo_id: todo.todo_id,
+          name: todo.name,
           description: todo.description,
           date: todo.date,
           isDone: todo.isDone

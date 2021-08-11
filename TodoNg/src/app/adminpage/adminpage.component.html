@@ -1,48 +1,108 @@
-<p>adminpage works!</p>
+<div class="container">
+    <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile>
+            <mat-card>
+                <mat-card-header>
+                    <div mat-card-avatar></div>
+                    <mat-card-title>Users</mat-card-title>
+                </mat-card-header>
+                <mat-card-actions>
+                    <button mat-button (click)="goUsers()">User list</button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-card>
+                <mat-card-header>
+                    <div mat-card-avatar></div>
+                    <mat-card-title>Todos</mat-card-title>
+                </mat-card-header>
+                <mat-card-actions>
+                    <button mat-button (click)="goTodo()">My Todo List</button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
 
-<div>
+        <div [formGroup]="adminPageForm">
 
-    <mat-card>
-        <mat-card-header>
-            <div mat-card-avatar></div>
-            <mat-card-title>Admin</mat-card-title>
-            <mat-card-subtitle>Admin can manage users</mat-card-subtitle>
-        </mat-card-header>
-        <div mat-card-image></div>
-        <mat-card-actions>
+            <mat-grid-tile>
+                <mat-card>
+                    <mat-card-header>
+                        <div mat-card-avatar></div>
+                        <mat-card-title>Approve New Admin</mat-card-title>
+                    </mat-card-header>
 
-            <button mat-button>Click me to manage users</button>
+                    <mat-card-content>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Candidate Email
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
 
-        </mat-card-actions>
-    </mat-card>
+                            <mat-error *ngIf="cannotAddAdmin && !approveEmail?.touched && !approveEmail?.errors?.email">User doesn't exists or User has
+                                already been an Admain.</mat-error>
+                            <mat-error *ngIf="approveEmail?.errors?.email">Invalid email input</mat-error>
+                            <mat-error
+                                *ngIf="approveEmail?.errors?.required && approveEmail?.touched && !cannotAddAdmin">email
+                                input required</mat-error>
+                            <mat-form-field appearance="legacy">
+                                <mat-label>email</mat-label>
+                                <input matInput formControlName="approveEmail">
+                            </mat-form-field>
+
+                        </mat-expansion-panel>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button [disabled]="!approveEmail?.valid " (click)="approveAdmin()">New
+                            Admin</button>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-grid-tile>
 
 
-    <mat-card>
-        <mat-card-header>
-            <div mat-card-avatar></div>
-            <mat-card-title>User</mat-card-title>
-            <mat-card-subtitle>Admin has todo lists</mat-card-subtitle>
-        </mat-card-header>
-        <div mat-card-image></div>
-        <mat-card-actions>
+            <mat-grid-tile>
+                <mat-card>
+                    <mat-card-header>
+                        <div mat-card-avatar></div>
+                        <mat-card-title>Remove Admin</mat-card-title>
+                    </mat-card-header>
 
-            <button mat-button>Click me to manage todo lists</button>
+                    <mat-card-content>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Candidate Email
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
 
-        </mat-card-actions>
-    </mat-card>
 
-    <mat-card>
-        <mat-card-header>
-            <div mat-card-avatar></div>
-            <mat-card-title>New Admin</mat-card-title>
-            <mat-card-subtitle>To approve new admins</mat-card-subtitle>
-        </mat-card-header>
-        <div mat-card-image></div>
-        <mat-card-actions>
+                            <mat-error *ngIf="cannotRemoveAdmin && !removeEmail?.touched && !removeAdminNotExist && !removeEmail?.errors?.email">Can't remove a non-admin user or yourself.</mat-error>
+                            <mat-error *ngIf="removeEmail?.errors?.email">Invalid email input</mat-error>
+                            <mat-error *ngIf="removeAdminNotExist && !removeEmail?.touched && !cannotRemoveAdmin && !removeEmail?.errors?.email ">User not exist.</mat-error>
+                            <mat-error *ngIf="removeEmail?.errors?.required && removeEmail?.touched && !cannotRemoveAdmin">
+                                email input required</mat-error>
 
-            <button mat-button>Click me to create a new admin account</button>
+                            <mat-form-field appearance="legacy">
+                                <mat-label>email</mat-label>
+                                <input matInput formControlName="removeEmail">
+                            </mat-form-field>
 
-        </mat-card-actions>
-    </mat-card>
+                        </mat-expansion-panel>
+                    </mat-card-content>
+
+                    <mat-card-actions>
+
+                        <button [disabled]="!removeEmail?.valid " (click)="removeAdmin()" mat-button>Remove Admin</button>
+
+                    </mat-card-actions>
+                </mat-card>
+
+            </mat-grid-tile>
+
+        </div>
+
+    </mat-grid-list>
+
 
 </div>

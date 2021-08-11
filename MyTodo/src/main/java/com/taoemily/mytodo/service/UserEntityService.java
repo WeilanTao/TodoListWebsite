@@ -2,10 +2,13 @@ package com.taoemily.mytodo.service;
 
 import com.taoemily.mytodo.entity.Todo;
 import com.taoemily.mytodo.entity.UserEntity;
+import com.taoemily.mytodo.exception.AdminIdentityConflictException;
+import com.taoemily.mytodo.exception.UserNotExistException;
 import com.taoemily.mytodo.repository.TodoRepository;
 import com.taoemily.mytodo.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,32 +39,34 @@ public class UserEntityService {
         return list;
     }
 
-    public void setAdmin(String useremail) {
+    public void setAdmin(String useremail) throws  AdminIdentityConflictException,UserNotExistException{
         try {
             UserEntity userEntity = userRepository.getUserByEmail(useremail)
-                    .orElseThrow(() -> new RuntimeException("No such user."));
+                    .orElseThrow(() ->  new UserNotExistException("No such user."));
 
-            if(!userEntity.getIsAdmin()) {
+            if(userEntity.getIsAdmin()==true)
+                throw new AdminIdentityConflictException("can't set this user since this user has already been an admin");
+
+
                 userEntity.setIsAdmin(true);
                 userRepository.saveAndFlush(userEntity);
-            }else{
-                throw new RuntimeException("can't set this user since this user has already been an admin");
-            }
-        } catch (RuntimeException e) {
+
+        }
+        catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    public void removeAdmin(String useremail) {
+    public void removeAdmin(String useremail) throws UserNotExistException,AdminIdentityConflictException{
         try {
             UserEntity userEntity = userRepository.getUserByEmail(useremail)
-                    .orElseThrow(() -> new RuntimeException("No such user."));
+                    .orElseThrow(() ->  new UserNotExistException("No such user."));
 
             if (userEntity.getIsAdmin()) {
                 userEntity.setIsAdmin(false);
                 userRepository.saveAndFlush(userEntity);
             }else{
-                throw new RuntimeException("can't remove this user since this user is not an admin");
+                throw new AdminIdentityConflictException("can't remove this user since this user is not an admin");
             }
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
