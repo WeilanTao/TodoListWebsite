@@ -23,7 +23,7 @@ export class UserTodoComponent implements OnInit {
 
   displayedColumns = ['name', 'description', 'date', 'isDone', 'option'];
 
-  username: string = '';
+  // username: string = '';
   constructor(
     private route: Router,
     private activatedRoute: ActivatedRoute,
@@ -34,7 +34,7 @@ export class UserTodoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.username = this.activatedRoute.snapshot.params['username'];
+    // this.username = this.activatedRoute.snapshot.params['username'];
 
     this.loadTodoList();
 
@@ -42,7 +42,7 @@ export class UserTodoComponent implements OnInit {
 
  
   goAdminPage(){
-    this.route.navigate(['adminpage', this.username,'access'])
+    this.route.navigate(['admin','access'])
   }
 
   loadTodoList() {

@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
-  username:string="";
   users:any;
   notEmpty:any;
 
@@ -23,13 +22,13 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.username = this.activatedRoute.snapshot.params['username'];
+    // this.username = this.activatedRoute.snapshot.params['username'];
 
     this.getAllUsers();
   }
 
   goAdminPage(){
-    this.router.navigate(['adminpage', this.username,'access'])
+    this.router.navigate(['admin','access'])
   }
 
   getAllUsers(){
