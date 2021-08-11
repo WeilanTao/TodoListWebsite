@@ -11,10 +11,6 @@ import { throwError } from 'rxjs';
 })
 export class TodoService {
 
-  // constructor(http: HttpClient) {
-  //   super("http://localhost:8080/users/1/todos", http);
-  // }
-
   constructor(private http: HttpClient) {
 
   }

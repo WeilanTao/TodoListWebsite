@@ -8,6 +8,7 @@ import com.taoemily.mytodo.dto.SignupRequest;
 import com.taoemily.mytodo.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,7 +28,10 @@ public class AuthController {
         try {
             AuthResponse user = authService.login(loginRequest);
             return ResponseEntity.ok(user);
-        } catch (Exception e) {
+        }catch(BadCredentialsException e){
+            return ResponseEntity.status(403).body("Bad credentials");
+        }
+        catch (Exception e) {
             e.printStackTrace();
 //            return  ResponseEntity.badRequest().body(e);
         }

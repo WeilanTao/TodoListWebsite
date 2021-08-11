@@ -13,7 +13,7 @@ export class AdminpageComponent implements OnInit {
 
   adminPageForm: FormGroup;
 
-  username:string;
+
 
   cannotRemoveAdmin: boolean = false;
   cannotAddAdmin: boolean = false;
@@ -24,7 +24,7 @@ export class AdminpageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router 
     ) {
-      this.username = this.activatedRoute.snapshot.params['username'];
+  
 
     this.adminPageForm = new FormGroup({
       'approveEmail': new FormControl('', [Validators.email, Validators.required]),
@@ -37,11 +37,11 @@ export class AdminpageComponent implements OnInit {
 
 
   goTodo(){
-    this.router.navigate(['user',this.username, 'todos']);
+    this.router.navigate(['user','todos']);
   }
 
   goUsers(){
-    this.router.navigate(['admin',this.username,'allusers']);
+    this.router.navigate(['admin','allusers']);
   }
 
 

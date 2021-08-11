@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserTodoComponent } from './user-todo/user-todo.component';
-import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
@@ -35,6 +34,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
 import 'moment/locale/ca';
 import { UsersComponent } from './users/users.component';
+import { NotfoundpageComponent } from './errorpage/notfoundpage/notfoundpage.component';
+import { ForbiddenpageComponent } from './errorpage/forbiddenpage/forbiddenpage.component';
 
 @NgModule({
   declarations: [//the following components are part of the specific module
@@ -42,7 +43,8 @@ import { UsersComponent } from './users/users.component';
     LoginComponent,
     HomeComponent,
     UserTodoComponent,
-    ErrorpageComponent,
+    NotfoundpageComponent,
+    ForbiddenpageComponent,
     HeaderComponent,
     FooterComponent,
     SignupComponent,
@@ -50,6 +52,8 @@ import { UsersComponent } from './users/users.component';
     UpdateTodoComponent,
     CreateTodoComponent,
     UsersComponent,
+    NotfoundpageComponent,
+    ForbiddenpageComponent,
 
   ],
   imports: [//the components in this Module need the following Module dependencies to work
