@@ -1,0 +1,18 @@
+.welcomepage{
+    width:100%;
+    height:calc(100vh - 75px);/*100vh: making thing the entire height of the browser*/
+    background-color: hsl(150, 46%, 79%);
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    background-size: cover;/*it will cover the rntire banner, no matter the height or the width*/
+    display: table;
+
+}
+
+.welcome{
+    margin-top:50px;
+    text-align: center;
+    white-space: nowrap;
+    
+}
+

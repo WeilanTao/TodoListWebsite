@@ -1,31 +1,25 @@
 <nav class="navbar navbar-default navbar-static-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
 
-            
-            <div class="navbar-brand">
-                <a href="/" class="nav-link" *ngIf="!authService.isUserLoggedIn()">MyTodo</a>
-            </div>
+    <div class="navbar-header">
+
+        <div class="navbar-brand globalfont">
+            <div *ngIf="!authService.isUserLoggedIn()">MyTodo</div>
+        </div>
 
 
-            <ul class=" nav navbar-nav " *ngIf="!authService.isUserLoggedIn()">
-                <ul class="breadcrumb">
-                    <li><a href="/home" class="nav-link">Pricing</a></li>
-                    <li><a href="/home" class="nav-link">Source Code</a></li>
-                    <li><a href="/home" class="nav-link">Contact Emily</a></li>
-                </ul>
+        <ul class=" nav  globalfont " *ngIf="!authService.isUserLoggedIn()">
+            <ul class="breadcrumb">
+                <li><a href="/home" class="nav-link noselect">Pricing</a></li>
+                <li><a href="/home" class="nav-link noselect">Source Code</a></li>
+                <li><a href="/home" class="nav-link noselect">Contact Emily</a></li>
             </ul>
-            </div>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a *ngIf="!authService.isUserLoggedIn()" href="/login" class="nav-link">login</a></li>
-                <li><a *ngIf="authService.isUserLoggedIn()" (click)="authService.logOut()" href=""
-                        class="nav-link">logout</a></li>
-            </ul>
-   
-
-
-
+        </ul>
     </div>
+
+    <ul class="nav  navbar-right globalfont ">
+        <li><a *ngIf="!authService.isUserLoggedIn()" href="/login" class="nav-link right noselect">login</a></li>
+        <li><a *ngIf="authService.isUserLoggedIn()" (click)="authService.logOut()" href="" class="nav-link  right noselect">logout</a>
+        </li>
+    </ul>
 
 </nav>
