@@ -1,11 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-/* input.ng-invalid.ng-touched{
-    border: 1px solid red;
-} */
+@import "https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap";
 
-mat-error{
-    color: rgb(161, 19, 19);
+
+
+mat-error, .mat-error{
+    color: rgb(161, 19, 19) !important;
     font-size: 8px;
+
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+.globalfont{
+    font-size: 10px;
+}
+
+.noselectd{
+    user-select:none !important;
+}
+
+.navbar {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;    
+  }
+
+  .mat-icon-button{
+    /* border: black solid 1px; */
+    padding: 0;
+    margin: 3px;
+    align-items: center;
+  
+    width: 20px !important;
+    height: 20px !important;
+  } 
+  
+  .mat-icon-button .mat-icon{
+    position: absolute;
+    /* border: black solid 1px; */
+    height: 80% !important;;
+    width: 80% !important;;
+    font-size:10px !important;
+    top:10%;
+    bottom: 10%;
+    left:10%;
+    right: 10%;
+    line-height: 15px !important;
+    vertical-align: top;
+  }
+  

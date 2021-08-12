@@ -7,3 +7,16 @@ footer{
     text-align: center;
     background-color: rgb(243, 242, 242);
 }
+
+.container{
+    position: absolute;
+    padding:0 ;
+    left: 30%;
+    right:30%;   
+    width:40%;
+    height: 90%;
+    line-height: 90%px;
+    top:5%;
+    bottom: 5%;
+    white-space: nowrap;
+} 

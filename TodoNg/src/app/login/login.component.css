@@ -1,3 +1,17 @@
+.wrapper{
+    margin:5% 40% 10% 40%;
+}
+
+button{
+    width: 40%;
+    margin:0px;
+    
+}
+
 .highlight{
     color:#111
+}
+
+h2{
+    font-size: 10px;
 }
