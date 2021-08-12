@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+hide = true;
 
   signupRequestPayload:SignupRequestPayload;
 

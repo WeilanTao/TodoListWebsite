@@ -1,56 +1,59 @@
 <form [formGroup]="signupform" (ngSubmit)="signup()">
-    <h2 >Sign Up</h2>
+    <div class="wrapper">
+        <h2>Sign Up</h2>
 
-    <div formGroupName="account">
-        <div class="username">
-            <label for="account">User name</label>
-            <input type="input" id="username" name="username" class="form-control" placeholder="User name"
-                formControlName="username" #userName (input)="inputUsername(userName)">
-            <div *ngIf="username?.touched && username?.invalid" class="alert alert-danger">
-                <div *ngIf="username?.errors?.required">Email can't be empty</div>
-                <!-- <div *ngIf="username?.errors?.maxLength">User name too long</div> -->
+        <div formGroupName="account">
+            <div class="username">
+                <mat-form-field appearance="legacy">
+                    <mat-label class="globalfont">User name</mat-label>
+                    <input matInput id="username" name="username" class=" globalfont" 
+                        formControlName="username" #userName (input)="inputUsername(userName)">
+                    <mat-error *ngIf="username?.touched && username?.invalid 
+                                        && username?.errors?.required">Username can't be empty </mat-error>
+           
+                    <!-- <div *ngIf="username?.errors?.maxLength">User name too long</div> -->
+                </mat-form-field>
             </div>
+
+            <div class="email">
+                <mat-form-field appearance="legacy">
+                    <mat-label class="globalfont">Email address</mat-label>
+                    <input matInput type="email" id="email" name="email" class="globalfont" 
+                        formControlName="email" #userEmail (input)="inputEmail(userEmail)">
+
+                        <mat-error *ngIf="email?.touched && email?.invalid  &&   email?.errors?.required" >Email
+                            can't be empty</mat-error>
+                        <mat-error *ngIf="email?.touched && email?.invalid  &&   email?.errors?.email" >Please enter an vaild email</mat-error>
+                </mat-form-field>
+                
+                 
+            </div>
+
+
+            <div class="password ">
+                <mat-form-field appearance="legacy">
+                    <mat-label class="globalfont">Password</mat-label>
+
+                    <input matInput [type]="hide ? 'password' : 'text'" class="globalfont" formControlName="password" #userPasseord (input)="inputPassword(userPasseord)">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" type="button">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+
+                      <mat-error *ngIf="password?.touched && password?.invalid  &&   password?.errors?.required" >Password
+                        can't be empty</mat-error>
+
+                </mat-form-field>
+
+            </div>
+
+            <!-- <p>FromGroupValues: {{ signupform.value | json }}</p> -->
         </div>
 
-        <div class="email">
-            <label for="account">Email address</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Email address"
-                formControlName="email" #userEmail (input)="inputEmail(userEmail)">
-            <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
-                <div *ngIf="email?.errors?.required">Email can't be empty</div>
-                <div *ngIf="email?.errors?.email">Please enter an vaild email</div>
-            </div>
+        <div *ngIf="userExists && !password?.touched && !email?.touched && !username?.touched " class="mat-error">
+            User already exists.
         </div>
 
-
-        <div class="password ">
-
-            <label for="password">Password</label>
-
-            <div class="input-group">
-                <input [type]="isShow? 'text':'password'" id="password" name="password" class="form-control"
-                    placeholder="Password" formControlName="password" #userPasseord
-                    (input)="inputPassword(userPasseord)">
-                <div class="input-group-addon">
-                    <span class="input-group-text" id="basic-addon2">
-                        <i class="glyphicon glyphicon-eye-close" [class.highlight]="isShow" (click)="changeShow()"></i>
-                    </span>
-                </div>
-            </div>
-
-
-            <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
-                <div *ngIf="password?.errors?.required">Password can't be empty</div>
-            </div>
-        </div>
-
-        <!-- <p>FromGroupValues: {{ signupform.value | json }}</p> -->
+        <button mat-button [disabled]="!signupform.valid" class="globalfont" type="submit">Sign me
+            up</button>
     </div>
-
-    <div *ngIf="userExists && !password?.touched && !email?.touched && !username?.touched " class="alert alert-danger">
-        User already exists.
-    </div>
-
-    <button [disabled]="!signupform.valid" class="btn btn-lg btn-primary btn-block" type="submit">Sign me up</button>
-
 </form>

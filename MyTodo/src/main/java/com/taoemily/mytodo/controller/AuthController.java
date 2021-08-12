@@ -9,6 +9,7 @@ import com.taoemily.mytodo.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -43,6 +44,9 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<Object> signupUser(@Valid @RequestBody SignupRequest signupRequest) {
         try {
+            if(!StringUtils.hasText(signupRequest.getPassword()) || !StringUtils.hasText(signupRequest.getUseremail()) ||
+                !StringUtils.hasText(signupRequest.getUsername()))
+                return ResponseEntity.status(400).body("Bad Request");
             authService.saveNewUser(signupRequest);
             return ResponseEntity.status(200).body("signed up successfully");
         } catch (Exception e) {

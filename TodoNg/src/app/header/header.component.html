@@ -1,17 +1,17 @@
 <nav class="navbar navbar-default navbar-static-top">
 
-    <div class="navbar-header">
+    <div class="navbar-header ">
 
-        <div class="navbar-brand globalfont">
-            <div *ngIf="!authService.isUserLoggedIn()">MyTodo</div>
+        <div class="navbar-brand globalfont ">
+            <div>MyTodo</div>
         </div>
 
 
         <ul class=" nav  globalfont " *ngIf="!authService.isUserLoggedIn()">
-            <ul class="breadcrumb">
-                <li><a href="/home" class="nav-link noselect">Pricing</a></li>
-                <li><a href="/home" class="nav-link noselect">Source Code</a></li>
-                <li><a href="/home" class="nav-link noselect">Contact Emily</a></li>
+            <ul class="breadcrumb ">
+                <li><a href="/home" class="nav-link ">Pricing</a></li>
+                <li><a href="/home" class="nav-link ">Source Code</a></li>
+                <li><a href="/home" class="nav-link ">Contact Emily</a></li>
             </ul>
         </ul>
     </div>
