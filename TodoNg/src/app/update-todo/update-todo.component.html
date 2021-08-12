@@ -15,7 +15,7 @@
             <mat-error *ngIf="description?.errors?.maxlength">Todo name no more than {{descriptionLimit}} chars</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="legacy" class="globalfont ">
+        <mat-form-field appearance="legacy" class="globalfont">
             <mat-label>Target Date</mat-label>
             <input matInput formControlName="tododate" class="globalfont" [min]="minDate" [max]="maxDate" [matDatepicker]="dp">
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
