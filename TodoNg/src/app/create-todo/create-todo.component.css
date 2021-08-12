@@ -1,4 +1,49 @@
 .container {
-    background-color: white;
+    height: 80%;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: repeat(4, 25%);
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+    grid-auto-flow: column dense;
+    direction: ltr;
+    /* border: black solid 1px; */
 }
 
+.slid{
+    /* border: black 1px solid ; */
+    padding-top: 8%;
+}
+
+
+.descrip{
+    grid-row: 1 / 4;
+}
+
+.buttons{
+    grid-row:4;
+}
+
+textarea{
+    min-height: 96px; 
+}
+
+:host ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+ 
+    background-color: #49c5b6 ;
+}
+
+:host ::ng-deep  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #49c5b6 ;
+}
+
+:host ::ng-deep .mat-slide-toggle .mat-slide-toggle-thumb{
+    height:15px;
+    width:15px;
+}
+
+:host ::ng-deep .mat-slide-toggle .mat-slide-toggle-bar{
+    height:10px;
+    width:30px;
+}

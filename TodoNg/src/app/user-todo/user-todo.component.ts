@@ -85,9 +85,9 @@ export class UserTodoComponent implements OnInit {
       UpdateTodoComponent,
       {
         disableClose:true,
-        autoFocus : true,
-        width : "600px",
-        height: "300px",
+        autoFocus : false,
+        width : "300px",
+        height: "200px",
         data: {
           todo_id: todo.todo_id,
           name: todo.name,
@@ -109,7 +109,7 @@ export class UserTodoComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = false;
-    dialogConfig.width = "600px";
+    dialogConfig.width = "500px";
     dialogConfig.height = "300px";
     const dialogRef = this.dialog.open(CreateTodoComponent, dialogConfig);
     dialogRef.afterClosed()

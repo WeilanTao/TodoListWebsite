@@ -1,0 +1,9 @@
+.container{
+    display: grid;
+    width: 100%;
+}
+
+
+textarea{
+    min-height: 50px; 
+  }

@@ -1,3 +1,4 @@
+<div class="wrapperoverflow">
 <div class="upper">
     <button mat-icon-button [ngClass]="{'hide':!isAdmin}" (click)="goAdminPage()">
         <mat-icon>arrow_back_ios</mat-icon>
@@ -7,27 +8,30 @@
     </button>
 </div>
 
-<div class="container  mat-elevation-z8">
+<div class="container  mat-elevation-z8 ">
  
     <table mat-table [dataSource]="todos">
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Todo </th>
-            <td mat-cell *matCellDef="let todo"> {{todo.name}} </td>
+            <th mat-header-cell *matHeaderCellDef class="globalfont"> Todo </th>
+            <td mat-cell *matCellDef="let todo"  class="globalfont"> {{todo.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let todo"> {{todo.description}} </td>
+            <th mat-header-cell *matHeaderCellDef  class="globalfont "> Description </th>
+            <td mat-cell *matCellDef="let todo"  class="globalfont"> {{todo.description}} </td>
         </ng-container>
 
         <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef> Target Date </th>
-            <td mat-cell *matCellDef="let todo"> {{todo.date|date}} </td>
+            <th mat-header-cell *matHeaderCellDef  class="globalfont"> Target Date </th>
+            <td mat-cell *matCellDef="let todo"  class="globalfont"> {{todo.date|date}} </td>
         </ng-container>
 
         <ng-container matColumnDef="isDone">
-            <th mat-header-cell *matHeaderCellDef> Status</th>
-            <td mat-cell *matCellDef="let todo"> {{todo.isDone}} </td>
+            <th mat-header-cell *matHeaderCellDef  class="globalfont"> Status</th>
+            <td mat-cell *matCellDef="let todo"  class="globalfont"> 
+                <div *ngIf="todo.isDone==true">Done</div>
+                <div *ngIf="todo.isDone!=true">Todo</div>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="option">
@@ -35,30 +39,29 @@
             <td mat-cell *matCellDef="let todo">
 
                 <button mat-icon-button (click)="editTodo(todo)">
-                    <mat-icon>open_in_full</mat-icon>
+                    <mat-icon class="expand">open_in_full</mat-icon>
                 </button>
                 <button mat-icon-button (click)="doneTodo(todo.todo_id)">
-                    <mat-icon>check</mat-icon>
+                    <mat-icon class="done">check</mat-icon>
                 </button>
                 <button mat-icon-button (click)="deleteTodo(todo.todo_id)">
-                    <mat-icon>delete_outline</mat-icon>
+                    <mat-icon class="delete">delete_outline</mat-icon>
                 </button>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="NoTodo" >
-            <mat-footer-cell *matFooterCellDef >No Todo Event</mat-footer-cell>
+            <mat-footer-cell *matFooterCellDef  class="globalfont">No Todo Event</mat-footer-cell>
         </ng-container>
         
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
        
      
-        <tr mat-footer-row *matFooterRowDef="['NoTodo']" [ngClass]="{'hide':!notEmpty}"></tr>
-
-
+        <tr mat-footer-row *matFooterRowDef="['NoTodo']" [ngClass]="{'hide':!notEmpty}" ></tr>
       
     
     </table>
 
+</div>
 </div>

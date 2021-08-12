@@ -1,12 +1,13 @@
 .container {
-  height: 270px;
-  position: fixed;
+  height: 70%;
+  position: absolute;
   /* display: inline-block; */
   padding: 0;
   /* border: 1px black solid; */
   /* margin: 0% 5% 0% 5%; */
-  width:80%;
-  left:10%;
+  width: 700px;
+  left: 5%;
+  right: 5%;
   overflow: auto;
 }
 
@@ -15,11 +16,89 @@ table {
   margin: 0;
 }
 
-
 .upper {
   margin-left: 20px;
   height: 30px;
   /* border: black 1px solid; */
   padding: 0;
   width: 100%;
+}
+
+.wrapperoverflow {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+
+
+mat-footer-cell, mat-cell {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column !important;
+  justify-content: center !important;
+  border: black 1px solid;
+  text-align: center;
+}
+
+/* Table Styling*/
+
+.mat-header-row {
+  height: 30px;
+}
+
+tr.mat-row {
+  min-height: 20px !important;
+  height: 20px !important;
+}
+
+.mat-column-name {
+  white-space: nowrap !important;
+  text-align: left;
+
+  border-right: black solid 1px;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  width: 15% !important;
+
+  max-width: 60px;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+}
+
+.mat-column-description {
+  white-space: nowrap !important;
+  text-align: left;
+
+  border-right: rgb(204, 204, 204) solid 1px;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  width: 40% !important;
+
+  max-width: 60px;
+  text-overflow: ellipsis;
+
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.mat-column-date{
+  padding-left: 15px;
+  width: 15% !important;
+}
+
+.mat-header-isDone{
+  text-align: center;
+
+}
+
+.expand{
+  color:cornflowerblue;
+}
+
+.done{
+  color: mediumaquamarine;
+}
+
+.delete{
+  color:palevioletred;
 }
