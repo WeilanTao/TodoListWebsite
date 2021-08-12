@@ -13,4 +13,17 @@
     margin: 0;
   }
 
- 
+  .mat-column-name,  .mat-column-email, .mat-column-role{
+    white-space: nowrap !important;
+
+    /* border-right: rgb(204, 204, 204) solid 1px; */
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    width: 30% !important;
+  
+    max-width: 60px;
+    text-overflow: ellipsis;
+  
+    padding-right: 15px;
+    padding-left: 15px;
+  }
