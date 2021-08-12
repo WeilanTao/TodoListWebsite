@@ -1,23 +1,23 @@
-<div class="container">
+<form [formGroup]="updateTodoForm" >
 
-    <form [formGroup]="updateTodoForm" >
+    <div class="container">
 
-        <mat-form-field appearance="legacy">
-            <mat-label>Todo Name</mat-label>
-            <input matInput placeholder="enter todo name..." formControlName="todoname" required>
+        <mat-form-field appearance="legacy" class="globalfont">
+            <mat-label >Todo Name</mat-label>
+            <input matInput class="globalfont"  formControlName="todoname" required>
             <mat-error *ngIf="todoname?.errors?.required">Todo name can't be empty</mat-error>
             <mat-error *ngIf="todoname?.errors?.maxlength">Todo name no more than {{todonameLimit}} chars</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="legacy">
+        <mat-form-field appearance="legacy" class="globalfont">
             <mat-label>Todo Description</mat-label>
-            <textarea matInput placeholder="enter todo description..." formControlName="description"></textarea>
+            <textarea matInput class="globalfont" formControlName="description"></textarea>
             <mat-error *ngIf="description?.errors?.maxlength">Todo name no more than {{descriptionLimit}} chars</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="legacy" >
+        <mat-form-field appearance="legacy" class="globalfont">
             <mat-label>Target Date</mat-label>
-            <input matInput formControlName="tododate"  [min]="minDate" [max]="maxDate" [matDatepicker]="dp">
+            <input matInput formControlName="tododate" class="globalfont" [min]="minDate" [max]="maxDate" [matDatepicker]="dp">
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker touchUi  #dp></mat-datepicker>
             <mat-error *ngIf="tododate?.invalid">Invalid input. Please select form the build in calander </mat-error>
@@ -27,8 +27,10 @@
         <!-- <p>FromGroupValues: {{ updateTodoForm.value | json }}</p> -->
 
         <mat-dialog-actions >
-            <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
-            <button  mat-button [disabled]="!(todoname?.valid && description?.valid && tododate?.valid &&updateTodoForm.valid&&(todoname?.dirty || description?.dirty ||tododate?.dirty ))" mat-dialog-close (click)="submit()">Submit</button>
-          </mat-dialog-actions>
-    </form>
-</div>
+            <button mat-button mat-dialog-close  class="globalfont" (click)="cancel()">Cancel</button>
+            <button  mat-button class="globalfont"  [disabled]="!(todoname?.valid && description?.valid && tododate?.valid &&updateTodoForm.valid&&(todoname?.dirty || description?.dirty ||tododate?.dirty ))" mat-dialog-close (click)="submit()">Submit</button>
+        </mat-dialog-actions>
+    
+    </div>
+
+</form>

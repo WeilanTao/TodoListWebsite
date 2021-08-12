@@ -1,108 +1,76 @@
-<div class="container">
-    <mat-grid-list cols="2" rowHeight="2:1">
-        <mat-grid-tile>
-            <mat-card>
-                <mat-card-header>
-                    <div mat-card-avatar></div>
-                    <mat-card-title>Users</mat-card-title>
-                </mat-card-header>
-                <mat-card-actions>
-                    <button mat-button (click)="goUsers()">User list</button>
-                </mat-card-actions>
-            </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <mat-card>
-                <mat-card-header>
-                    <div mat-card-avatar></div>
-                    <mat-card-title>Todos</mat-card-title>
-                </mat-card-header>
-                <mat-card-actions>
-                    <button mat-button (click)="goTodo()">My Todo List</button>
-                </mat-card-actions>
-            </mat-card>
-        </mat-grid-tile>
+<div class="wrapperoverflow">
 
-        <div [formGroup]="adminPageForm">
+    <div [formGroup]="adminPageForm">
 
-            <mat-grid-tile>
-                <mat-card>
-                    <mat-card-header>
-                        <div mat-card-avatar></div>
-                        <mat-card-title>Approve New Admin</mat-card-title>
-                    </mat-card-header>
+        <div class="container">
 
-                    <mat-card-content>
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Candidate Email
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
+            <div class=" ele btn1">
+                <button  class="ttbtn globalfont" mat-button (click)="goUsers()">User list</button>
+            </div>
 
-                            <mat-error *ngIf="cannotAddAdmin && !approveEmail?.touched && !approveEmail?.errors?.email">User doesn't exists or User has
-                                already been an Admain.</mat-error>
-                            <mat-error *ngIf="approveEmail?.errors?.email">Invalid email input</mat-error>
-                            <mat-error
-                                *ngIf="approveEmail?.errors?.required && approveEmail?.touched && !cannotAddAdmin">email
-                                input required</mat-error>
-                            <mat-form-field appearance="legacy">
-                                <mat-label>email</mat-label>
-                                <input matInput formControlName="approveEmail">
-                            </mat-form-field>
+            <div class="ele btn2" >
+                <button  class="ttbtn globalfont" mat-button (click)="goTodo()">My Todo List</button>
+            </div>
 
-                        </mat-expansion-panel>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button mat-button [disabled]="!approveEmail?.valid " (click)="approveAdmin()">New
-                            Admin</button>
-                    </mat-card-actions>
-                </mat-card>
-            </mat-grid-tile>
+            <div class="ele  panel1" >
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
+                        <mat-panel-title class="globalfont">
+                            Approve New Admin
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <mat-error *ngIf="cannotAddAdmin && !approveEmail?.touched && !approveEmail?.errors?.email">
+                        User doesn't exists or User has
+                        already been an Admain.</mat-error>
+                    <mat-error *ngIf="approveEmail?.errors?.email">Invalid email input</mat-error>
+                    <mat-error *ngIf="approveEmail?.errors?.required && approveEmail?.touched && !cannotAddAdmin">email
+                        input required</mat-error>
+                    <mat-form-field appearance="legacy">
+                        <mat-label class="globalfont">email</mat-label>
+                        <input matInput class="globalfont" formControlName="approveEmail">
+                    </mat-form-field>
+
+                    <button mat-button class="globalfont" [disabled]="!approveEmail?.valid " (click)="approveAdmin()">New
+                        Admin</button>
+
+                </mat-expansion-panel>
+
+            </div>
+
+            <div class="ele panel2">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
+                        <mat-panel-title class="globalfont">
+                            Remove Admin
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
 
 
-            <mat-grid-tile>
-                <mat-card>
-                    <mat-card-header>
-                        <div mat-card-avatar></div>
-                        <mat-card-title>Remove Admin</mat-card-title>
-                    </mat-card-header>
+                    <mat-error
+                        *ngIf="cannotRemoveAdmin && !removeEmail?.touched && !removeAdminNotExist && !removeEmail?.errors?.email">
+                        Can't remove a non-admin user or yourself.</mat-error>
+                    <mat-error *ngIf="removeEmail?.errors?.email">Invalid email input</mat-error>
+                    <mat-error
+                        *ngIf="removeAdminNotExist && !removeEmail?.touched && !cannotRemoveAdmin && !removeEmail?.errors?.email ">
+                        User not exist.</mat-error>
+                    <mat-error *ngIf="removeEmail?.errors?.required && removeEmail?.touched && !cannotRemoveAdmin">
+                        email input required</mat-error>
 
-                    <mat-card-content>
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Candidate Email
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
+                    <mat-form-field appearance="legacy">
+                        <mat-label class="globalfont">email</mat-label>
+                        <input class="globalfont" matInput formControlName="removeEmail">
+                    </mat-form-field>
 
+                    <button  class="globalfont" [disabled]="!removeEmail?.valid " (click)="removeAdmin()" mat-button>Remove
+                        Admin</button>
 
-                            <mat-error *ngIf="cannotRemoveAdmin && !removeEmail?.touched && !removeAdminNotExist && !removeEmail?.errors?.email">Can't remove a non-admin user or yourself.</mat-error>
-                            <mat-error *ngIf="removeEmail?.errors?.email">Invalid email input</mat-error>
-                            <mat-error *ngIf="removeAdminNotExist && !removeEmail?.touched && !cannotRemoveAdmin && !removeEmail?.errors?.email ">User not exist.</mat-error>
-                            <mat-error *ngIf="removeEmail?.errors?.required && removeEmail?.touched && !cannotRemoveAdmin">
-                                email input required</mat-error>
+                </mat-expansion-panel>
 
-                            <mat-form-field appearance="legacy">
-                                <mat-label>email</mat-label>
-                                <input matInput formControlName="removeEmail">
-                            </mat-form-field>
-
-                        </mat-expansion-panel>
-                    </mat-card-content>
-
-                    <mat-card-actions>
-
-                        <button [disabled]="!removeEmail?.valid " (click)="removeAdmin()" mat-button>Remove Admin</button>
-
-                    </mat-card-actions>
-                </mat-card>
-
-            </mat-grid-tile>
+            </div>
 
         </div>
 
-    </mat-grid-list>
-
+    </div>
 
 </div>

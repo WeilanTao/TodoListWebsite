@@ -7,7 +7,7 @@
 
 mat-error, .mat-error{
     color: rgb(161, 19, 19) !important;
-    font-size: 8px;
+    font-size: 8px !important;
 
 }
 
@@ -18,7 +18,7 @@ input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 .globalfont{
-    font-size: 10px;
+    font-size: 10px !important;
 }
 
 .noselectd{
@@ -55,5 +55,19 @@ input:-webkit-autofill:active  {
     right: 10%;
     line-height: 15px !important;
     vertical-align: top;
+  }
+
+  .wrapperoverflow {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .mat-header-row {
+    height: 30px !important;
+  }
+  
+  tr.mat-row {
+    min-height: 20px !important;
+    height: 20px !important;
   }
   
