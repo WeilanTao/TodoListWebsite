@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TodoNg';
+
+  constructor(){
+  }
+
+  anchortransfer:string="";
+
+  receiveMessage(a:string) {
+    console.log("parenttransfer", a);
+    this.anchortransfer = a;
+  }
 }

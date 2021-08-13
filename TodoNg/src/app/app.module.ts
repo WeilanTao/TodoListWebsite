@@ -36,6 +36,7 @@ import 'moment/locale/ca';
 import { UsersComponent } from './users/users.component';
 import { NotfoundpageComponent } from './errorpage/notfoundpage/notfoundpage.component';
 import { ForbiddenpageComponent } from './errorpage/forbiddenpage/forbiddenpage.component';
+import { HeaderHomeParentComponent } from './header-home-parent/header-home-parent.component';
 
 @NgModule({
   declarations: [//the following components are part of the specific module
@@ -54,6 +55,7 @@ import { ForbiddenpageComponent } from './errorpage/forbiddenpage/forbiddenpage.
     UsersComponent,
     NotfoundpageComponent,
     ForbiddenpageComponent,
+    HeaderHomeParentComponent,
 
   ],
   imports: [//the components in this Module need the following Module dependencies to work

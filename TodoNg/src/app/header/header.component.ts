@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { AuthService } from '../service/auth/auth.service';
 
 @Component({
@@ -13,7 +14,18 @@ export class HeaderComponent implements OnInit {
      public authService:AuthService
   ) { }
 
+ 
+
   ngOnInit(): void {
   }
+
+
+  @Output() anchorChangeEvent = new EventEmitter<string>();
+
+  sendanchor(anchor:string){
+    console.log(anchor);
+    this.anchorChangeEvent.emit(anchor);
+  }
+ 
 
 }
