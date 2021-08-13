@@ -13,25 +13,25 @@
             </div>
 
             <div class="ele  panel1" >
-                <mat-expansion-panel>
+                <mat-expansion-panel  >
                     <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
                         <mat-panel-title class="globalfont">
                             Approve New Admin
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
+                  
+                    <mat-form-field appearance="legacy">
+                        <mat-label class="globalfont panelinput " >email</mat-label>
+                        <input matInput class="globalfont panelinput" autocomplete="off" formControlName="approveEmail">
+                    </mat-form-field>
                     <mat-error *ngIf="cannotAddAdmin && !approveEmail?.touched && !approveEmail?.errors?.email">
                         User doesn't exists or User has
                         already been an Admain.</mat-error>
                     <mat-error *ngIf="approveEmail?.errors?.email">Invalid email input</mat-error>
                     <mat-error *ngIf="approveEmail?.errors?.required && approveEmail?.touched && !cannotAddAdmin">email
                         input required</mat-error>
-                    <mat-form-field appearance="legacy">
-                        <mat-label class="globalfont">email</mat-label>
-                        <input matInput class="globalfont" formControlName="approveEmail">
-                    </mat-form-field>
-
-                    <button mat-button class="globalfont" [disabled]="!approveEmail?.valid " (click)="approveAdmin()">New
+                    <button mat-button class="globalfont panelinput" [disabled]="!approveEmail?.valid " (click)="approveAdmin()">New
                         Admin</button>
 
                 </mat-expansion-panel>
@@ -39,13 +39,18 @@
             </div>
 
             <div class="ele panel2">
-                <mat-expansion-panel>
+                <mat-expansion-panel class="mtpanel">
                     <mat-expansion-panel-header [collapsedHeight]="'30px'" [expandedHeight]="'30px'">
                         <mat-panel-title class="globalfont">
                             Remove Admin
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
+
+                    <mat-form-field appearance="legacy">
+                        <mat-label class="globalfont panelinput">email</mat-label>
+                        <input class="globalfont panelinput" autocomplete="off" matInput formControlName="removeEmail">
+                    </mat-form-field>
 
                     <mat-error
                         *ngIf="cannotRemoveAdmin && !removeEmail?.touched && !removeAdminNotExist && !removeEmail?.errors?.email">
@@ -57,12 +62,7 @@
                     <mat-error *ngIf="removeEmail?.errors?.required && removeEmail?.touched && !cannotRemoveAdmin">
                         email input required</mat-error>
 
-                    <mat-form-field appearance="legacy">
-                        <mat-label class="globalfont">email</mat-label>
-                        <input class="globalfont" matInput formControlName="removeEmail">
-                    </mat-form-field>
-
-                    <button  class="globalfont" [disabled]="!removeEmail?.valid " (click)="removeAdmin()" mat-button>Remove
+                    <button  class="globalfont panelinput"  [disabled]="!removeEmail?.valid " (click)="removeAdmin()" mat-button>Remove
                         Admin</button>
 
                 </mat-expansion-panel>

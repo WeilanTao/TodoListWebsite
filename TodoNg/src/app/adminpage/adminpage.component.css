@@ -1,10 +1,9 @@
 .container {
     /* height: 80%; */
     display: grid;
-    margin-top: 3%;
-    width: 70%;
+    margin: 80px;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 30% 70%;
+    /* grid-template-rows: 30% 70%; */
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     grid-auto-flow: row dense;
@@ -21,7 +20,35 @@
     width: 260px;
     text-align: center;
     vertical-align: center;
+    line-height: 30px;
+    background-color: cadetblue;
+    border-radius: 0;
+    padding: 0;
+    color: white;
+    margin: 0;
+}
 
+mat-expansion-panel {
+    box-shadow: none; 
+    background-color: cadetblue; 
+    border-radius: 0%;
+    text-align: center;
+    vertical-align: center;
+}
+
+mat-panel-title, .panelinput{
+    color: white;
+
+}
+
+mat-error{
+    margin: 0;
+    padding: 0;
+    /* border: black solid 1px; */
+    text-align: left;
+    margin-left: 15px;
+    line-height: 10px;
+    
 }
 
 .btn1{
@@ -43,7 +70,7 @@
 }
 
 .ele{
-    border: black 1px solid;
+    /* border: black 1px solid; */
     width: 260px;
     /* width: 300px;
     height: 100px; */

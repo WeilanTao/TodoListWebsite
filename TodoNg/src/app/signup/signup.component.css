@@ -4,8 +4,7 @@
 
 button{
     width: 40%;
-    margin:0px;
-    
+    padding: 0;
 }
 h2{
     font-size: 10px;
