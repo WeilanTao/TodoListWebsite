@@ -23,9 +23,11 @@ export class HeaderComponent implements OnInit {
   @Output() anchorChangeEvent = new EventEmitter<string>();
 
   sendanchor(anchor:string){
-    console.log(anchor);
     this.anchorChangeEvent.emit(anchor);
   }
  
-
+  goToLink(url:string){
+    console.log("hihihi", url);
+    window.open(url,"_blank");
+  }
 }

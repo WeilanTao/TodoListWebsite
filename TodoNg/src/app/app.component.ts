@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,15 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'TodoNg';
 
-  constructor(){
+
+  activatedComponentReference: any;
+
+  onActivate(activatedComponentReference:any) {
+    this.activatedComponentReference = activatedComponentReference;
+    console.log("activatedComponentReference", );
   }
 
-  anchortransfer:string="";
-
-  receiveMessage(a:string) {
-    console.log("parenttransfer", a);
-    this.anchortransfer = a;
+  receiveMessage(a: string) {
+    // console.log("parenttransfer", a);
+    //When a component is loaded, onActivate will be triggered and we will get the component reference and can access all functions using that.
+    const childRouteComp = this.activatedComponentReference as HomeComponent;
+    childRouteComp.scrollToAnchor(a);
   }
+
 }

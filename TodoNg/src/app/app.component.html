@@ -1,6 +1,6 @@
 <app-header (anchorChangeEvent)="receiveMessage($event)"></app-header>
 
-<router-outlet></router-outlet> <!-- enables roulting -->
+<router-outlet (activate)="onActivate($event)"></router-outlet> <!-- enables roulting -->
 
 
 <app-footer></app-footer>

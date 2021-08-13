@@ -25,11 +25,14 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  @Input('anchor') anchor: string='';
 
-  scrollToAnchor(){
-    console.log(this.anchor);
-    this.vps.scrollToAnchor(this.anchor);
+  scrollToAnchor(anchor:string){
+    this.vps.scrollToAnchor(anchor);
+  }
+
+  goToLink(url:string){
+    console.log("hihihi", url);
+    window.open(url,"_blank");
   }
 
 }

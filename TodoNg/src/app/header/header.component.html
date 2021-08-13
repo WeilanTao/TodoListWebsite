@@ -9,9 +9,9 @@
 
         <ul class=" nav  globalfont " *ngIf="!authService.isUserLoggedIn()">
             <ul class="breadcrumb ">
-                <li><a href="/home" class="nav-link ">Pricing</a></li>
-                <li><a href="/home" class="nav-link ">Source Code</a></li>
                 <li><a (click)="sendanchor('contactemily')" class="nav-link ">Contact Emily</a></li>
+                <li><a (click)="sendanchor('aboutthewebsite')"  class="nav-link ">About the website</a></li>
+                <li><a (click)="goToLink('https://github.com/WeilanTao/TodoListWebsite')" class="nav-link ">Source Code</a></li>
             </ul>
         </ul>
     </div>
