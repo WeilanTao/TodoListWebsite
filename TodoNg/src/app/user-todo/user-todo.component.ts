@@ -99,7 +99,7 @@ export class UserTodoComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       this.loadTodoList();
     });
   }
@@ -114,7 +114,7 @@ export class UserTodoComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateTodoComponent, dialogConfig);
     dialogRef.afterClosed()
       .subscribe(result => {
-        console.log('The dialog was ceated');
+        // console.log('The dialog was ceated');
         this.loadTodoList();
     });
 

@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToLink(url:string){
-    console.log("hihihi", url);
     window.open(url,"_blank");
   }
 
