@@ -47,10 +47,10 @@ export class AdminpageComponent implements OnInit {
 
   //TODO:SUCCESSFULL MESSAGE
   approveAdmin() {
-    console.log(this.approveEmail?.value as string);
+    // console.log(this.approveEmail?.value as string);
     this.adminService.adminapprove(this.approveEmail?.value as string)
       .subscribe(response => {
-        console.log(response);
+        // console.log(response);
         this.approveEmail?.reset();
       }, (error: Response) => {
         if (error.status === 409 || error.status === 404) {
@@ -68,16 +68,16 @@ export class AdminpageComponent implements OnInit {
     console.log(this.removeEmail?.value as string);
     this.adminService.adminremove(this.removeEmail?.value as string)
       .subscribe(response => {
-        console.log(response);
+        // console.log(response);
         this.removeEmail?.reset();
       }, (error: Response) => {
         if (error.status === 409) {
           console.log(error);
-          console.log(this.cannotRemoveAdmin , this.removeAdminNotExist)
+          // console.log(this.cannotRemoveAdmin , this.removeAdminNotExist)
           this.cannotRemoveAdmin = true;
         } else if (error.status === 404) {
           console.log(error);
-          console.log(this.cannotRemoveAdmin , this.removeAdminNotExist)
+          // console.log(this.cannotRemoveAdmin , this.removeAdminNotExist)
           this.removeAdminNotExist = true;
         }
         this.removeEmail?.reset();

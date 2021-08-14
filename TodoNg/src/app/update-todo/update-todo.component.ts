@@ -26,7 +26,7 @@ export class UpdateTodoComponent implements OnInit {
     private todoService: TodoService
   ) {
 
-    console.log(data);
+    // console.log(data);
 
     this.todonameLimit = GlobalVariable.TODONAME_LIMIT;
     this.descriptionLimit = GlobalVariable.DESCRIPTION_LIMIT;

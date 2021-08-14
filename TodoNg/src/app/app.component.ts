@@ -15,7 +15,7 @@ export class AppComponent {
 
   onActivate(activatedComponentReference:any) {
     this.activatedComponentReference = activatedComponentReference;
-    console.log("activatedComponentReference", );
+    // console.log("activatedComponentReference", );
   }
 
   receiveMessage(a: string) {

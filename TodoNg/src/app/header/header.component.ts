@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   }
  
   goToLink(url:string){
-    console.log("hihihi", url);
+    // console.log("hihihi", url);
     window.open(url,"_blank");
   }
 }
