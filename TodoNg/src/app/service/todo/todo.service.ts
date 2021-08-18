@@ -16,7 +16,7 @@ export class TodoService {
   }
 
   getAllTodoForUser() {
-    return this.http.get("http://localhost:8080/todos");
+    return this.http.get("http://ec2-35-182-185-7.ca-central-1.compute.amazonaws.com:8080/todos");
 
   }
 
@@ -30,7 +30,7 @@ export class TodoService {
       responseType: 'text' as 'tex',
     };
 
-    return this.http.request('delete', "http://localhost:8080/deletetodos", options);
+    return this.http.request('delete', "http://ec2-35-182-185-7.ca-central-1.compute.amazonaws.com:8080/deletetodos", options);
 
   }
 
@@ -44,17 +44,17 @@ export class TodoService {
       responseType: 'text' as 'tex',
     };
 
-    return this.http.request('put', "http://localhost:8080/donetodo", options);
+    return this.http.request('put', "http://ec2-35-182-185-7.ca-central-1.compute.amazonaws.com:8080/donetodo", options);
 
   }
 
   updateTodo(todo: UpdateTodoPayload) {
 
-    return this.http.put("http://localhost:8080/updatetodo", todo, { responseType: 'text' });
+    return this.http.put("http://ec2-35-182-185-7.ca-central-1.compute.amazonaws.com:8080/updatetodo", todo, { responseType: 'text' });
   }
 
   createTodo(todo: CreateTodoPayload) {
-    return this.http.post("http://localhost:8080/createtodos", todo, { responseType: 'text' })
+    return this.http.post("http://ec2-35-182-185-7.ca-central-1.compute.amazonaws.com:8080/createtodos", todo, { responseType: 'text' })
       .pipe(catchError((error: Response) => {
         return throwError(new AppError(error.json));
       }));
