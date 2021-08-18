@@ -18,7 +18,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin()
+@CrossOrigin("http://mytodofrontend.s3-website.ca-central-1.amazonaws.com")
 @AllArgsConstructor
 public class AuthController {
     private AuthService authService;

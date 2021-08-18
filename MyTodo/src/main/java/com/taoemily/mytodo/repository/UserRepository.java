@@ -10,12 +10,12 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    @Query(value = "select * from Users where email=?1", nativeQuery = true)
+    @Query(value = "select * from users where email=?1", nativeQuery = true)
     Optional<UserEntity> getUserByEmail(String email);
 
 
     @Transactional
     @Modifying
-    @Query(value="delete from Users where email=?1", nativeQuery = true)
+    @Query(value="delete from users where email=?1", nativeQuery = true)
     Integer deleteByEmail(String email);
 }

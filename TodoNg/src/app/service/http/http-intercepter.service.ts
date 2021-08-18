@@ -99,7 +99,7 @@ export class HttpIntercepterService implements HttpInterceptor {
 
   private addToken(req: HttpRequest<any>, accesstoken: string) {
 
-    if (!req.url.match(/ec2-35-182-185-7.ca-central-1.compute.amazonaws.com:8080\//)) {
+    if (!req.url.match(/ec2-35-183-114-6.ca-central-1.compute.amazonaws.com:8080\//)) {
       return req;
     }
 
