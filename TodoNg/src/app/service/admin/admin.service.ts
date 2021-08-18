@@ -12,7 +12,7 @@ export class AdminService {
 
     let params = new HttpParams();
     params = params.append("useremail", email);
-    return this.http.put("http://localhost:8080/admin/adminapprove", params, { responseType: 'text' });
+    return this.http.put("http://ec2-35-182-185-7.ca-central-1.compute.amazonaws.com:8080/admin/adminapprove", params, { responseType: 'text' });
 
   }
 
@@ -20,12 +20,12 @@ export class AdminService {
 
     let params = new HttpParams();
     params = params.append("useremail", email);
-    return this.http.put("http://localhost:8080/admin/adminremove", params, { responseType: 'text' });
+    return this.http.put("http://ec2-35-182-185-7.ca-central-1.compute.amazonaws.com:8080/admin/adminremove", params, { responseType: 'text' });
 
   }
 
   getAllUsers(){
-    return this.http.get("http://localhost:8080/admin/getalluser")
+    return this.http.get("http://ec2-35-182-185-7.ca-central-1.compute.amazonaws.com:8080/admin/getalluser")
   }
 
 }
