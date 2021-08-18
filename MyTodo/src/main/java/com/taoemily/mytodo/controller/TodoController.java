@@ -11,7 +11,7 @@ import java.security.Principal;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin()
 public class TodoController {
 
     @Autowired
