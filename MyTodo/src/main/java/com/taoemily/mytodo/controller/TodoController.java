@@ -11,7 +11,7 @@ import java.security.Principal;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin()
+@CrossOrigin("http://mytodofrontend.s3-website.ca-central-1.amazonaws.com")
 public class TodoController {
 
     @Autowired
