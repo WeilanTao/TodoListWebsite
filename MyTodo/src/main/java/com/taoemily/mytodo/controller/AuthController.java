@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 
-
+@CrossOrigin()
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin("http://mytodofrontend.s3-website.ca-central-1.amazonaws.com")
 @AllArgsConstructor
 public class AuthController {
     private AuthService authService;
