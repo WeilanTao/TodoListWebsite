@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
-@CrossOrigin()
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/admin")
+@CrossOrigin
 public class AdminController {
 
     @Autowired
