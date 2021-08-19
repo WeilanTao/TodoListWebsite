@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
-@CrossOrigin("http://mytodofrontend.s3-website.ca-central-1.amazonaws.com")
 public class TodoController {
 
     @Autowired
