@@ -25,4 +25,4 @@ Comments:
 </br>
 &emsp;&emsp; password:user
 </br>
-⭐This websits is compatible on various browsers; but it is recommended to try it on Google Chrome browser as it gives the best UI fit!
+⭐This websits is compatible on various browsers; but it is recommended to try on Google Chrome browser as Chrome gives the best UI fit!
