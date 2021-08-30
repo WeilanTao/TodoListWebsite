@@ -13,7 +13,7 @@ Comments:
 </br>
 ⭐ To have a galance of my website you can try:
 </br>
-&emsp;  Admain sample acconut: 
+&emsp;  Admin sample acconut: 
 </br>
 &emsp;&emsp; email:admin@gmail.com
 </br>
