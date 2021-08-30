@@ -9,7 +9,7 @@ website url: http://www.mytodonet.com.s3-website.ca-central-1.amazonaws.com/
 
 </br>
 
-Comment: 
+Comments: 
 </br>
 ⭐ To have a galance of my website you can try:
 </br>
@@ -25,4 +25,4 @@ Comment:
 </br>
 &emsp;&emsp; password:user
 </br>
-⭐try it on Google Chrome browser; it gives the best UI fit of this website!
+⭐This websits is compatible on various browsers; but it is recommended to try it on Google Chrome browser as it gives the best UI fit!
