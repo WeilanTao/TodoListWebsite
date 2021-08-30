@@ -8,4 +8,15 @@ website url: http://www.mytodonet.com.s3-website.ca-central-1.amazonaws.com/
 
 </br>
 
-Comment: try it on Google Chrome browser; it gives the best UI fit of this website!
+Comment: 
+</br>
+⭐ To have a galance of my website you can try:
+</br>
+Admain sample acconut: 
+    email:admin@gmail.com
+    password:nimda
+User sample account:
+    email:user1@gmail.com
+    password:user
+</br>
+⭐try it on Google Chrome browser; it gives the best UI fit of this website!
