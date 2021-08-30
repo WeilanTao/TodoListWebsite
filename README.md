@@ -1,9 +1,9 @@
 # MyTodo
 MyTodo website helps users to manage their Todo list.
-
-Java 8
+Tackstack:&emsp;
+Java 8 &ensp;
 Angular 12 </br>
-AWS_S3_EC2_RDS Deploy </br>
+AWS_S3_EC2_RDS Deploy: </br>
 website url: http://www.mytodonet.com.s3-website.ca-central-1.amazonaws.com/
 
 </br>
