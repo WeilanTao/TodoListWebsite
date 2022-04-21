@@ -1,10 +1,10 @@
 # MyTodo Website
 MyTodo website helps users to manage their Todo list. It also gives admin users access to manae users
 </br>
-Tech stack:&ensp;
+
+# Tech stack:&ensp;
 Java 8;
 Angular 12 </br>
-AWS Deploy: </br>
 
 # What I Learned
 * Leverage website app based on Java Spring Boot 
