@@ -1,4 +1,4 @@
-# MyTodo
+# MyTodo Website
 MyTodo website helps users to manage their Todo list. It also gives admin users access to manae users
 </br>
 Tech stack:&ensp;
