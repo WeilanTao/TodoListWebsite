@@ -1,10 +1,17 @@
 # MyTodo
-MyTodo website helps users to manage their Todo list.
+MyTodo website helps users to manage their Todo list. It also gives admin users access to manae users
 </br>
 Tech stack:&ensp;
 Java 8;
 Angular 12 </br>
 AWS Deploy: </br>
+
+# What I Learned
+* Leverage website app based on Java Spring Boot 
+* Integrate Angular framework to manage frontend of the website. Material is used for the UI.
+* Integrate Spring Security for Token based user system. Tokens are refreshed every 5 minutes and expires on the 10th day after user signing in.
+* Integrate Hibernate ORM database. Practised one-to-many relationship
+* Practised AWS deploy
 
 # Website Demo
 * Cover Page
@@ -23,13 +30,12 @@ AWS Deploy: </br>
 * Admin Access
 ![adminaccess](https://drive.google.com/uc?export=view&id=1rmK4iL22_ar99eqFLPjSl9ggzqNIYV0m)
 
-website url: http://www.mytodonet.com.s3-website.ca-central-1.amazonaws.com/
 
 </br>
 
 Comments: 
 </br>
-⭐ Sample accounts:
+* Sample accounts:
 </br>
 &emsp;  Admin sample acconut: 
 </br>
@@ -43,4 +49,4 @@ Comments:
 </br>
 &emsp;&emsp; password:user
 </br>
-⭐This websits is compatible on various browsers; but it is recommended to try on Google Chrome browser as Chrome gives the best UI fit!
+* This websits closed for now,in order to save AWS fee.
