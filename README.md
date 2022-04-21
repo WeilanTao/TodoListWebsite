@@ -36,12 +36,6 @@ Angular 12 </br>
 # Comments: 
 * Sample accounts:
 Admin sample acconut: 
-&emsp; email:admin@gmail.com
-</br>
-&emsp;&emsp; password:nimda
-</br>
-User sample account:
-&emsp; email:user1@gmail.com
-</br>
-&emsp; password:user
+email:admin@gmail.com
+password:nimda
 * This website is closed for now, in order to save AWS fee.
