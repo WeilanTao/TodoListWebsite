@@ -34,19 +34,14 @@ Angular 12 </br>
 </br>
 
 # Comments: 
-</br>
 * Sample accounts:
-</br>
-&emsp;  Admin sample acconut: 
-</br>
-&emsp;&emsp; email:admin@gmail.com
+Admin sample acconut: 
+&emsp; email:admin@gmail.com
 </br>
 &emsp;&emsp; password:nimda
 </br>
-&emsp;User sample account:
+User sample account:
+&emsp; email:user1@gmail.com
 </br>
-&emsp;&emsp; email:user1@gmail.com
-</br>
-&emsp;&emsp; password:user
-</br>
-* This websits closed for now,in order to save AWS fee.
+&emsp; password:user
+* This website is closed for now, in order to save AWS fee.
