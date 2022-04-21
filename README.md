@@ -10,6 +10,7 @@ Angular 12 </br>
 * Leverage website app based on Java Spring Boot 
 * Integrate Angular framework to manage frontend of the website. Material is used for the UI.
 * Integrate Spring Security for Token based user system. Tokens are refreshed every 5 minutes and expires on the 10th day after user signing in.
+* Admin system with both frontend and backend check.
 * Integrate Hibernate ORM database. Practised one-to-many relationship
 * Practised AWS deploy
 
