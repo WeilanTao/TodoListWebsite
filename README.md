@@ -7,7 +7,8 @@ Angular 12 </br>
 AWS Deploy: </br>
 
 # Website Demo
-! [todolist] (https://drive.google.com/uc?export=view&id=1V6H3cIh-KIWhjGzoslQqZc9VG9W5xvVr)
+![todolist](https://drive.google.com/uc?export=view&id=1V6H3cIh-KIWhjGzoslQqZc9VG9W5xvVr)
+
 
 website url: http://www.mytodonet.com.s3-website.ca-central-1.amazonaws.com/
 
