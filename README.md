@@ -35,8 +35,12 @@ Angular 12 </br>
 </br>
 
 # Comments: 
+* AWS deploy: http://www.mytodonet.com.s3-website.ca-central-1.amazonaws.com/
 * Sample accounts:
 Admin sample acconut: 
 email:admin@gmail.com
-password:nimda
-* This website is closed for now, in order to save AWS fee.
+password:amin
+User sample account:
+email:Tester1@gmail.com
+password:tester1
+* Feel free to create your own account and explore the website!!
